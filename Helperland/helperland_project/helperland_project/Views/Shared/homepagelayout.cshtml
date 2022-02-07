@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model helperland_project.Models.User
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -10,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <link rel="shortcut icon" href="/images/favicon_img.png" type="image/x-icon">
     <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel=stylesheet>
     <link href="~/css/style.css" rel="stylesheet" />
 </head>
 <body>
@@ -49,7 +51,7 @@
                                     <a class="nav-link border-btn" href="#" title="Login" data-bs-toggle="modal" data-bs-target="#exampleModal">Login</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link border-btn" href="#" title="Become a Helper">
+                                    <a class="nav-link border-btn" asp-action="SpSignup" asp-controller="Home" title="Become a Helper">
                                         Become a
                                         Helper
                                     </a>
@@ -78,13 +80,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="row g-3">
+                    <form class="row g-3" asp-action="Login" asp-controller="Home">
                         <div class="col-12 emailModal">
-                            <input type="email" class="form-control" id="" placeholder="Email">
+                            <input asp-for="Email" type="email" class="form-control" id="" placeholder="Email">
                             <i class="far fa-user"></i>
                         </div>
                         <div class="col-12 pswModal">
-                            <input type="password" class="form-control" id="" placeholder="Password">
+                            <input asp-for="Password" type="password" class="form-control" id="" placeholder="Password">
                             <i class="fas fa-lock"></i>
                         </div>
                         <div class="col-12">
@@ -95,8 +97,9 @@
                                 </label>
                             </div>
                         </div>
+                        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
                         <div class="col-12 login-btn">
-                            <button type="button">Login</button>
+                            <button type="submit">Login</button>
                         </div>
                     </form>
                 </div>
@@ -108,14 +111,48 @@
                         </a>
                     </div>
                     <div class="accoutReg text-center">
-                        <p>Don't have an account? <a href="#">Create an account</a></p>
+                        <p>Don't have an account? <a asp-action="UserSignUp" asp-controller="Home">Create an account</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Login Modal End -->
-    <!-- Forgot Password Modal S -->
+    <div class="modal fade" id="changeModal" aria-labelledby="changeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered justify-content-center">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <img src="/images/yes-tickmark.png" alt="success" />
+                </div>
+                <div class="modal-body">
+                    <div class="modal_register">
+                        Password Changed Successfully
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center login-btn">
+                    <button type="submit" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="successModal" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered justify-content-center">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <img src="/images/yes-tickmark.png" alt="success" />
+                </div>
+                <div class="modal-body">
+                    <div class="modal_register">
+                        Registration Successfull
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center login-btn">
+                    <button type="submit" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Forgot Password Modal Start -->
     <div class="modal fade" id="frgPsw" aria-labelledby="frgPswLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -124,12 +161,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="row g-3">
+                    <form class="row g-3" asp-action="ForgotPass" asp-controller="Home">
                         <div class="col-12">
-                            <input type="email" class="form-control" id="" placeholder="Email Address">
+                            <input asp-for="Email" type="email" class="form-control" id="" placeholder="Email Address">
                         </div>
+                        <div class="text-danger" asp-validation-summary="All"></div>
                         <div class="col-12 send-btn">
-                            <button type="button">Send</button>
+                            <button type="submit">Send</button>
                         </div>
                     </form>
                 </div>
@@ -144,8 +182,7 @@
             </div>
         </div>
     </div>
-    <!-- Forgot Password Modal E -->
-
+    <!-- Forgot Password Modal End -->
     <div>
         @RenderBody()
     </div>
@@ -210,7 +247,51 @@
             </div>
         </div>
     </footer>
-    <script src="~/js/general.js"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="~/lib/twitter-bootstrap/js/bootstrap.js"></script>
+    <script src="~/js/general.js"></script>
+
+    @if (ViewBag.frgtpass != null)
+    {
+        <script>
+            var sucModal = new bootstrap.Modal(document.getElementById("frgPsw"), {});
+            document.onreadystatechange = function () {
+                sucModal.show();
+            };
+        </script>
+    }
+
+    @if (ViewBag.modal != null)
+    {
+        <script>
+            var myModal = new bootstrap.Modal(document.getElementById("exampleModal"), {});
+            document.onreadystatechange = function () {
+                myModal.show();
+            };
+        </script>
+    }
+
+    @if (ViewBag.changepass != null)
+    {
+        <script>
+            var sucModal = new bootstrap.Modal(document.getElementById("changeModal"), {});
+            document.onreadystatechange = function () {
+                sucModal.show();
+            };
+        </script>
+    }
+
+    @if (ViewBag.successModal != null)
+    {
+        <script>
+            var sucModal = new bootstrap.Modal(document.getElementById("successModal"), {});
+            document.onreadystatechange = function () {
+                sucModal.show();
+            };
+        </script>
+    }
 </body>
 </html>

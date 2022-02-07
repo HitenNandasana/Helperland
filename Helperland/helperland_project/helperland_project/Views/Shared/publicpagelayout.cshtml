@@ -7,13 +7,14 @@
 
     <link rel="shortcut icon" href="/images/favicon_img.png" type="image/x-icon">
     <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel=stylesheet>
     <link href="~/css/style.css" rel="stylesheet" />
 </head>
 <body>
     <!-- header -->
     <header class="site-header header-bg">
         <div class="header-wrapper d-flex justify-content-between align-items-center">
-            <a href="#" title="Helper hand" class="logo-block">
+            <a asp-action="Index" asp-controller="Home" title="Helper hand" class="logo-block">
                 <img src="/images/logo-small.png" alt="Helper hand logo">
             </a>
             <div class="header-right-block">
@@ -43,12 +44,12 @@
                                 </li>
                                 <li class="nav-item">
                                     <div class="btn-wrapper text-center">
-                                        <a href="#" title="Login" class="blue-btn2" data-bs-toggle="modal" data-bs-target="#exampleModal">Login</a>
+                                        <a asp-action="Index_Login" asp-controller="Home" title="Login" class="blue-btn2">Login</a>
                                     </div>
                                 </li>
                                 <li class="nav-item">
                                     <div class="btn-wrapper text-center">
-                                        <a href="#" title="Become a Helper" class="blue-btn3">Become a Helper</a>
+                                        <a title="Become a Helper" asp-action="SpSignup" asp-controller="Home" class="blue-btn3">Become a Helper</a>
                                     </div>
                                 </li>
                             </ul>
@@ -59,83 +60,7 @@
         </div>
     </header>
 
-    <!-- Login Modal Start -->
-    <div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Login to your account</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="row g-3">
-                        <div class="col-12 emailModal">
-                            <input type="email" class="form-control" id="" placeholder="Email">
-                            <i class="far fa-user"></i>
-                        </div>
-                        <div class="col-12 pswModal">
-                            <input type="password" class="form-control" id="" placeholder="Password">
-                            <i class="fas fa-lock"></i>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
-                                <label class="form-check-label" for="gridCheck">
-                                    Remember me
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-12 login-btn">
-                            <button type="button">Login</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <div class="forgotpsw">
-                        <a id="frgLink" href="#" data-bs-toggle="modal" data-bs-target="#frgPsw">
-                            Forgot
-                            Password?
-                        </a>
-                    </div>
-                    <div class="accoutReg text-center">
-                        <p>Don't have an account? <a href="#">Create an account</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Login Modal End -->
-    <!-- Forgot Password Modal S -->
-    <div class="modal fade" id="frgPsw" aria-labelledby="frgPswLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="frgPswLabel">Forgot Password</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="row g-3">
-                        <div class="col-12">
-                            <input type="email" class="form-control" id="" placeholder="Email Address">
-                        </div>
-                        <div class="col-12 send-btn">
-                            <button type="button">Send</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <div>
-                        <a href="#" class="loginlink" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Login
-                            Now
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Forgot Password Modal E -->
-
+   
     <div>
         @RenderBody()
     </div>
@@ -202,6 +127,8 @@
         </div>
     </footer>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="~/lib/twitter-bootstrap/js/bootstrap.js"></script>
     <script src="~/js/general.js"></script>
 </body>

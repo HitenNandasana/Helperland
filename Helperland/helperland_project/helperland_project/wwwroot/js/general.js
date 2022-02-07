@@ -1,3 +1,30 @@
+$('#password, #confirm_password').on('keyup', function () {
+    if ($('#password').val() == $('#confirm_password').val()) {
+        $('#message').html('Matching').css('color', 'green');
+        $('#but').prop('disabled', false);
+    } else {
+        $('#message').html('Not Matching').css('color', 'red');
+        $('#but').prop('disabled', true);
+    }
+});
+$(document).ready(function () {
+    $("#isCheck").change(function () {
+        if (this.checked) {
+            $('#message2').css('display', 'none');
+        } else {
+            $('#message2').css('display', 'block');
+        }
+    });
+});
+$('#but').click(function () {
+
+    if ($("#isCheck").checked) {
+        $('#message2').css('display', 'none');
+    } else {
+        $('#message2').css('display', 'block');
+    }
+
+});
 
 function formatState(opt) {
 	if (!opt.id) {
