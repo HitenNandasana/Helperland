@@ -70,22 +70,29 @@
             <h2 class="text-center">Get in touch with us</h2>
             <div class="Contact_form mx-auto">
                 <form class="row  g-3" asp-action="Contact" asp-controller="Home">
+                    <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="col-md-6">
-                        <input type="text" asp-for="FirstName" class="form-control" id="Firstname" placeholder="First Name" required>
+                        <input type="text" asp-for="FirstName" class="form-control" id="Firstname" placeholder="First Name">
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
                     </div>
                     <div class="col-md-6">
-                        <input type="text" asp-for="LastName" class="form-control" id="Lastname" placeholder="Last Name" required>
+                        <input type="text" asp-for="LastName" class="form-control" id="Lastname" placeholder="Last Name">
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+
                     </div>
                     <div class="col-md-6">
                         <div class="row g-0">
                             <div class="col-sm-12 input-group">
                                 <span class="c_code align-items-center justify-content-center">+49</span>
-                                <input type="tel" asp-for="PhoneNumber" class="form-control" id="Phone number" placeholder="Mobile Number" pattern="[0-9]{10}" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" required>
+                                <input type="tel" asp-for="PhoneNumber" class="form-control" id="Phone number" placeholder="Mobile Number" pattern="[0-9]{10}" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))">
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <input type="email" asp-for="Email" class="form-control" id="Email" placeholder="Email address" required>
+                        <input type="email" asp-for="Email" class="form-control" id="Email" placeholder="Email address">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+
                     </div>
                     <div class="col-md-12">
                         <select asp-for="Subject" class="form-select form-sub" aria-label="Default select example">
@@ -93,10 +100,12 @@
                             <option value="Inquiry">Inquiry</option>
                             <option value="Renewal">Renewal</option>
                             <option value="Reluctance">Reluctance</option>
-                        </select>                    
+                        </select>
                     </div>
                     <div class="col-md-12">
                         <textarea class="form-control" asp-for="Message" id="message" placeholder="Messages" rows="4"></textarea>
+                        <span asp-validation-for="Message" class="text-danger"></span>
+
                     </div>
                     <div class="col-md-12 text-center bt">
                         <button class="c_sub_btn" type="submit" name="Submit"><h3>Submit</h3></button>

@@ -11,29 +11,34 @@
                 <form class="row g-3" asp-action="SpSignup" asp-controller="Home">
                     <h2>Register Now!</h2>
                     <div class="col-md-12">
-                        <input type="text" asp-for="Firstname" class="form-control" id="Firstname" placeholder="First Name" required>
+                        <input type="text" asp-for="Firstname" class="form-control" id="Firstname" placeholder="First Name">
+                        <span asp-validation-for="Firstname" class="text-danger"></span>
                     </div>
                     <div class="col-md-12">
-                        <input type="text" asp-for="Lastname" class="form-control" id="Lastname" placeholder="Last Name" required>
+                        <input type="text" asp-for="Lastname" class="form-control" id="Lastname" placeholder="Last Name">
+                        <span asp-validation-for="Lastname" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-12">
-                        <input type="email" asp-for="Email" class="form-control" id="Email" placeholder="Email address" required>
+                        <input type="email" asp-for="Email" class="form-control" id="Email" placeholder="Email address">
+                        <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="col-md-12">
                         <div class="row g-0">
-
                             <div class="col-sm-12 input-group">
                                 <span class="c_code align-items-center justify-content-center">+49</span>
-                                <input type="tel" asp-for="Phonenumber" class="form-control" id="Phone number" placeholder="Mobile Number" pattern="[0-9]{10}" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" required>
+                                <input type="tel" asp-for="Phonenumber" class="form-control" id="Phone number" placeholder="Mobile Number" pattern="[0-9]{10}" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))">
+                                <span asp-validation-for="Phonenumber" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <input type="password" asp-for="Password" class="form-control" id="password" minlength="1" placeholder="password" required>
+                        <input type="password" asp-for="Password" class="form-control" id="password" minlength="1" placeholder="password">
+                        <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <div class="col-md-12">
-                        <input type="password" name="confirm_password" class="form-control" id="confirm_password" placeholder="confirm Password" required>
+                        <input type="password" asp-for="Confirmpassword" class="form-control" id="confirm_password" placeholder="confirm Password">
+                        <span asp-validation-for="Confirmpassword" class="text-danger"></span>
                         <span id='message'></span>
                     </div>
                     <div class="col-md-12 input-group">
@@ -41,12 +46,14 @@
                         <label class="check_label">Send me newsletters from Helperland</label>
                     </div>
                     <div class="col-md-12 input-group">
-                        <input type="checkbox" name="terms_privacy" id="terms" class="check_box" required>
+                        <input type="checkbox" asp-for="PrivacyPolicy" id="terms" class="check_box" required>
                         <label class="check_label">I accept <a href="#">terms and conditions </a>&<a href="#"> privacy policy</a></label>
-                        <div id='message2' style="color: red; display: none;">Please accept Privacy Policy</div>
+                        <span asp-validation-for="PrivacyPolicy" class="text-danger"></span>
+                        @*                        <div id='message2' style="color: red; display: none;">Please accept Privacy Policy</div>
+                        *@
                     </div>
                     <div class="col-md-12 text-center">
-                        <button class="pro_sub_btn" type="submit" id="but" name="Submit">
+                        <button class="pro_sub_btn" type="submit" id="but" name="Register">
                             <h3>
                                 Get Started
                                 <img src="/images/arrow-white.png">

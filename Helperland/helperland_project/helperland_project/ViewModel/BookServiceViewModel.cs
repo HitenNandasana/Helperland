@@ -8,11 +8,25 @@ namespace helperland_project.ViewModel
 {
     public class BookServiceViewModel
     {
+      
         public List<AddressViewModel> address { get; set; }
+       
         public ZipCodeViewModel zipCodeViewModel { get; set; }
         public ServiceRequestViewModel ServiceRequestViewModel { get; set; }
         public int addressId { get; set; }
         [Required]
+
+        public int addressId2 { get; set; }
+
+        public string postalCode { get; set; }
         public bool checkPolicy { get; set; }
+
+        public string streetname { get; set; }
+
+        public string cityname { get; set; }
+
+        public int houseno { get; set; }
+
+        public string phonenumber { get; set; }
     }
 }
