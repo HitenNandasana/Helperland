@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace helperland_project.ViewModel
 {
-    public class DashboardServiceViewModel
+    public class NewServiceRequestViewModel
     {
         public int service_id { get; set; }
         public DateTime service_date { get; set; }
@@ -17,8 +17,10 @@ namespace helperland_project.ViewModel
         public string email { get; set; }
         public string comment { get; set; }
         public bool has_pet { get; set; }
-        public decimal? sp_rating { get; set; }
-        public string sp_name { get; set; }
+        public string cust_name { get; set; }
+        public string pincode { get; set; }
+        public string city { get; set; }
 
+        public int? conflictId { get; set; }
     }
 }

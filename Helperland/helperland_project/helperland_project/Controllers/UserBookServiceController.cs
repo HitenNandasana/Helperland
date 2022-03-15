@@ -23,32 +23,27 @@ namespace helperland_project.Controllers
         [HttpPost]
         public IActionResult CheckPostalCode(BookServiceViewModel bookServiceViewModel)
         {
-            
 
-                var spdetails = (from splist in _helperlandContext.Users
-                                 where splist.UserTypeId == 2 && splist.ZipCode == bookServiceViewModel.zipCodeViewModel.zipcode
-                                 select new
-                                 {
-                                     splist.UserId,
-                                     splist.FirstName,
-                                     splist.LastName
-                                 }).ToList();
+            var spdetails = (from splist in _helperlandContext.Users
+                             where splist.UserTypeId == 2 && splist.ZipCode == bookServiceViewModel.zipCodeViewModel.zipcode
+                             select new
+                             {
+                                 splist.UserId,
+                                 splist.FirstName,
+                                 splist.LastName
+                             }).ToList();
+            if (spdetails.FirstOrDefault() != null)
+            {
+                HttpContext.Session.SetString("again_called", "spfound");
+                HttpContext.Session.SetString("zipcode", bookServiceViewModel.zipCodeViewModel.zipcode);
 
-                if (spdetails.FirstOrDefault() != null || ModelState.IsValid)
-                {
-                    HttpContext.Session.SetString("again_called", "spfound");
-                    HttpContext.Session.SetString("zipcode", bookServiceViewModel.zipCodeViewModel.zipcode);
-
-                    return RedirectToAction("BookService", "Home");
-                }
-                else
-                {
-                    HttpContext.Session.SetString("again_called", "temp");
-                    return RedirectToAction("BookService", "Home");
-                }
-            
-
-
+                return RedirectToAction("BookService", "Home");
+            }
+            else
+            {
+                HttpContext.Session.SetString("again_called", "temp");
+                return RedirectToAction("BookService", "Home");
+            }
         }
 
         [HttpPost]
@@ -93,6 +88,7 @@ namespace helperland_project.Controllers
 
             Debug.WriteLine("this is service start time " + startdate);
             var get_ser_id = _helperlandContext.ServiceRequests.OrderBy(x => x.ServiceRequestId).Last(x => x.UserId == Int32.Parse(userid));
+            Debug.WriteLine("this is previous service id " + get_ser_id.ServiceId);
             ServiceRequest service = new ServiceRequest()
             {
                 UserId = Int32.Parse(userid),
@@ -106,11 +102,11 @@ namespace helperland_project.Controllers
                 TotalCost = total,
                 PaymentDue = false,
                 HasPets = haspet,
+                Comments = bookServiceViewModel.ServiceRequestViewModel.comments,
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now,
                 Distance = 10,
-                Status = 1,
-                Comments = bookServiceViewModel.ServiceRequestViewModel.comments
+                Status = 0
             };
             _helperlandContext.ServiceRequests.Add(service);
             _helperlandContext.SaveChanges();
@@ -179,12 +175,20 @@ namespace helperland_project.Controllers
                 };
                 _helperlandContext.ServiceRequestAddresses.Add(serviceRequestAddress);
                 _helperlandContext.SaveChanges();
-
-
-
             }
-
-
+            Rating rating = new Rating()
+            {
+                ServiceRequestId = getservicerequestid,
+                RatingFrom = Int32.Parse(userid),
+                RatingTo = 1,
+                Ratings = 0,
+                RatingDate = DateTime.Now,
+                OnTimeArrival = 0,
+                Friendly = 0,
+                QualityOfService = 0
+            };
+            _helperlandContext.Ratings.Add(rating);
+            _helperlandContext.SaveChanges();
             HttpContext.Session.SetString("showBookSuccess", "yes");
 
             HttpContext.Session.SetInt32("serviceRequestID", getservicerequestid);

@@ -159,7 +159,10 @@ C:\Users\pci140\Desktop\Project\Helperland\helperland_project\helperland_project
 C:\Users\pci140\Desktop\Project\Helperland\helperland_project\helperland_project\obj\Debug\netcoreapp3.1\Razor\Views\Home\UserSignup.cshtml.g.cs
 C:\Users\pci140\Desktop\Project\Helperland\helperland_project\helperland_project\obj\Debug\netcoreapp3.1\Razor\Views\Home\SpSignup.cshtml.g.cs
 C:\Users\pci140\Desktop\Project\Helperland\helperland_project\helperland_project\obj\Debug\netcoreapp3.1\Razor\Views\Home\ForgotPass.cshtml.g.cs
-C:\Users\pci140\Desktop\Project\Helperland\helperland_project\helperland_project\obj\Debug\netcoreapp3.1\Razor\Views\Home\Welcome.cshtml.g.cs
 C:\Users\pci140\Desktop\Project\Helperland\helperland_project\helperland_project\obj\Debug\netcoreapp3.1\Razor\Views\Home\BookService.cshtml.g.cs
 C:\Users\pci140\Desktop\Project\Helperland\helperland_project\helperland_project\obj\Debug\netcoreapp3.1\Razor\Views\Home\MySetting.cshtml.g.cs
 C:\Users\pci140\Desktop\Project\Helperland\helperland_project\helperland_project\obj\Debug\netcoreapp3.1\Razor\Views\Shared\CustomerServiceLayout.cshtml.g.cs
+C:\Users\pci140\Desktop\Project\Helperland\helperland_project\helperland_project\obj\Debug\netcoreapp3.1\Razor\Views\Shared\AdminPageLayout.cshtml.g.cs
+C:\Users\pci140\Desktop\Project\Helperland\helperland_project\helperland_project\obj\Debug\netcoreapp3.1\Razor\Views\Shared\ServiceProviderPageLayout.cshtml.g.cs
+C:\Users\pci140\Desktop\Project\Helperland\helperland_project\helperland_project\obj\Debug\netcoreapp3.1\Razor\Views\Home\Admin.cshtml.g.cs
+C:\Users\pci140\Desktop\Project\Helperland\helperland_project\helperland_project\obj\Debug\netcoreapp3.1\Razor\Views\Home\spMySetting.cshtml.g.cs

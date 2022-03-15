@@ -131,13 +131,15 @@
                                         extra_arr[i] = extra_str[j];
                                     }
                                     string[] extra_services = { "Inside Cabinets", "Inside fridge", "Inside Oven", "Laundry wash & dry", "Interior windows" };
+                                    double rating = Convert.ToDouble(ser.sp_rating);
+                                    int rate_int = Convert.ToInt32(rating);
                                     <tr class="sp_details pt-3">
                                         <td class="col-md-2">
                                             <p class="text-center">@ser.service_id</p>
                                         </td>
 
                                         <td class="col-md-2">
-                                            <div class="pe-auto" data-bs-target="@("#servicedetailModal"+ser.service_id)" data-bs-toggle="modal">
+                                            <div class="">
                                                 <p>
                                                     <img src="/images/calendar2.png"> <b>@date</b><br>
                                                     <img src="/images/layer-14.png">@start - @end
@@ -146,6 +148,29 @@
                                         </td>
 
                                         <td class="col-md-3">
+                                            @if (ser.sp_name != null)
+                                            {
+                                                <div class="row">
+                                                    <div class="col-sm-3 sh_cap_border ">
+                                                        <img src="/images/cap.png" id="cap">
+                                                    </div>
+                                                    <div class="col-sm-9 ">
+                                                        <p>
+                                                            @ser.sp_name<br>
+                                                            @for (int i = 0; i < rate_int; i++)
+                                                            {
+                                                                <img src="/images/star1.png">
+                                                            }
+                                                            @for (int i = rate_int; i < 5; i++)
+                                                            {
+                                                                <img src="/images/star2.png">
+                                                            }
+                                                            @rating
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            }
+
                                         </td>
 
                                         <td class="col-md-2 sh_payment">
@@ -185,13 +210,17 @@
                                                     <div class="row">
                                                         <div class="d-flex">
                                                             <label>Extras : </label>
-                                                            @for (int i = 0; i < 5; i++)
+                                                            <pre class="service_extra">
+                                                            @for(int i =0;i< 5;i++)
                                                             {
-                                                                if (extra_arr[i] == '1')
-                                                                {
-                                                                    <pre class="service_extra"> @extra_services[i]</pre>
+                                                                if(extra_arr[i] == '1')
+                                                                { 
+                                                                     @extra_services[i]  
+
                                                                 }
                                                             }
+                                                            </pre>
+
                                                         </div>
                                                     </div>
 
@@ -277,13 +306,13 @@
                                                         <div class="row pt-2">
                                                             <div class="col-sm-7 date-container">
                                                                 <input type="text" asp-for="rescheduled_date" id="service_date" class="form-control date_field" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="01/01/1111" />
-                                                                <span class="date-button2">
+                                                                <span class="date-button">
                                                                     <img src="/images/admin-calendar-blue.png">
                                                                 </span>
                                                             </div>
                                                             <div class="col-sm-5 clock-container">
                                                                 <input id="service_time" asp-for="rescheduled_time" type="time" placeholder="00:00" class="form-control">
-                                                                <span class="clock-button2">
+                                                                <span class="clock-button">
                                                                     <img src="/images/clock-blue.png">
                                                                 </span>
                                                             </div>
@@ -349,7 +378,7 @@
                     <thead id="shtable_thead">
                         <tr>
                             <th>
-                                <p>Service Id</p>
+                                <p>ID</p>
                             </th>
                             <th>
                                 <p>Service Details</p>
@@ -370,8 +399,7 @@
                     </thead>
 
                     <tbody>
-                        @{
-                            if (Model.pastServices != null)
+                        @{ if (Model.pastServices != null)
                             {
                                 foreach (var ser in Model.pastServices)
                                 {
@@ -417,12 +445,11 @@
                                     string date_str = ser.service_date.ToString();
                                     string date = date_str.Substring(0, 10);
                                     string start = date_str.Substring(10, 6);
-
+                                    double rating = Convert.ToDouble(ser.sp_rating);
+                                    int rate_int = Convert.ToInt32(rating);
                                     <tr class="sp_details pt-3">
-                                        <td class="col-md-1">
-                                            <div>
-                                                 <p class="text-center">@ser.service_id</p>
-                                            </div>
+                                        <td class="col-md-1 col-sm-9">
+                                            <p>@ser.service_id</p>
                                         </td>
                                         <td class="col-md-3">
                                             <div class="">
@@ -439,13 +466,14 @@
                                                 </div>
                                                 <div class="col-sm-9 ">
                                                     <p>
-                                                        Lyum Watson<br>
-                                                        <img src="/images/star1.png">
-                                                        <img src="/images/star1.png">
-                                                        <img src="/images/star1.png">
-                                                        <img src="/images/star1.png">
-                                                        <img src="/images/star2.png">
-                                                        4
+                                                        @ser.sp_name<br>
+                                                        @for (int i = 0; i < rate_int; i++)
+                                                        {
+                                                            <img src="/images/star1.png">}
+                                                        @for (int i = rate_int; i < 5; i++)
+                                                        {
+                                                            <img src="/images/star2.png">}
+                                                        @rating
                                                     </p>
                                                 </div>
                                             </div>
@@ -454,26 +482,23 @@
                                             € @ser.service_amount
                                         </td>
                                         <td class="col-md-2 sh_status align-items-center pt-1">
-                                            @if (ser.status == 1)
+                                            @if (ser.status == 2)
                                             {
                                                 <div class="sh_status_completed">
                                                     Completed
-                                                </div>
-                                            }
+                                                </div> }
                                             else
                                             {
                                                 <div class="sh_status_cancelled">
                                                     Cancelled
-                                                </div>
-                                            }
+                                                </div>}
 
 
                                         </td>
                                         <td class="col-md-1">
-                                            @if (ser.status == 1)
+                                            @if (ser.status == 2)
                                             {
-                                                <button data-bs-toggle="modal" data-bs-target="@("#ratespModal"+ser.service_id)" class="sh_ratesp">Rate SP</button>
-                                            }
+                                                <button data-bs-toggle="modal" data-bs-target="@("#ratespModal"+ser.service_id)" class="sh_ratesp">Rate SP</button>}
 
                                         </td>
                                     </tr>
@@ -488,13 +513,14 @@
                                                         </div>
                                                         <div class="col-sm-9 pt-3">
                                                             <p class="">
-                                                                Lyum Watson<br>
-                                                                <img src="/images/star1.png">
-                                                                <img src="/images/star1.png">
-                                                                <img src="/images/star1.png">
-                                                                <img src="/images/star1.png">
-                                                                <img src="/images/star2.png">
-                                                                4
+                                                                @ser.sp_name<br>
+                                                                @for (int i = 0; i < rate_int; i++)
+                                                                {
+                                                                    <img src="/images/star1.png">}
+                                                                @for (int i = rate_int; i < 5; i++)
+                                                                {
+                                                                    <img src="/images/star2.png">}
+                                                                @rating
                                                             </p>
                                                         </div>
                                                     </div>
@@ -549,28 +575,34 @@
                                                     <div class="row">
                                                         <label>Feedback on Service Provider</label>
                                                     </div>
-                                                    <div class="row">
-                                                        <textarea class="form-control sp_rate_textarea"></textarea>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-sm-3">
-                                                            <button class="service_reschedule_btn" type="button">Submit</button>
+                                                    <form asp-action="sp_rating" asp-controller="Home" class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="row">
+                                                                <textarea asp-for="feedback" class="form-control sp_rate_textarea"></textarea>
+                                                            </div>
+                                                            <div class="row">
+                                                                <input asp-for="on_time_arrival" type="hidden" id="@("hidden_ota"+ser.service_id)" />
+                                                                <input asp-for="freindly" type="hidden" id="@("hidden_frnd"+ser.service_id)" />
+                                                                <input asp-for="qualit_of_service" type="hidden" id="@("hidden_qos"+ser.service_id)" />
+                                                                <input asp-for="rate_ser_id" value="@ser.service_id" type="hidden" />
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-3">
+                                                                    <button data-bs-dismiss="modal" class="service_reschedule_btn" type="submit">Submit</button>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <input type="hidden" id="@("hidden_ota"+ser.service_id)" />
-                                                        <input type="hidden" id="@("hidden_frnd"+ser.service_id)" />
-                                                        <input type="hidden" id="@("hidden_qos"+ser.service_id)" />
-                                                    </div>
+                                                    </form>
+
+
 
                                                 </div>
 
                                             </div>
                                         </div>
                                     </div>
-                                }
-                            }
-                        }
+ }
+                            } }
 
 
 
@@ -597,7 +629,7 @@
 
                 <!-- Pills content -->
                 <!-- -----------------------mydetails content---------------- -->
-                <form asp-action="mySetting" asp-controller="Home" class="tab-pane fade show active" id="myDetails" role="tabpanel" aria-labelledby="v-pills-dashboard-tab">
+                <form asp-action="mySetting" asp-controller="Home" class="tab-pane fade show active ms-5" id="myDetails" role="tabpanel" aria-labelledby="v-pills-dashboard-tab">
 
                     <div class="row pt-4 personal_info">
                         <div class="col-md-4">
@@ -621,7 +653,7 @@
                                 <label>Email</label>
                             </div>
                             <div class="row pt-1">
-                                <input asp-for="user.Email" id="ms_email" class="form-control" type="email" placeholder="E-mail" />
+                                <input asp-for="user.Email" id="ms_email" class="form-control" type="email" placeholder="E-mail"  disabled/>
                             </div>
                         </div>
                     </div>
