@@ -7,6 +7,7 @@ namespace helperland_project.ViewModel
 {
     public class ServiceRequestViewModel
     {
+
         public string servicestartdate { get; set; }
         public string servicestrarttime { get; set; }
         public float servicehours { get; set; }

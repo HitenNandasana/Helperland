@@ -36,7 +36,7 @@
                         @if (HttpContextAccessor.HttpContext.Session.GetString("UserTypeId") == "1")
                         {
                             <li class="nav-item">
-                                <a class="sh-sp-btn faq_active" asp-action="book_service" asp-controller="Home">Book now</a>
+                                <a class="sh-sp-btn faq_active" asp-action="BookService" asp-controller="Home">Book now</a>
                             </li>
 }
                         <li class="nav-item">
@@ -156,12 +156,7 @@
                             <a id="v-pills-favPro-tab" data-bs-toggle="pill" data-bs-target="#v-pills-fp" role="tab"
                                aria-controls="#v-pills-fp" aria-selected="false">Favourite Pros</a>
 
-                            <a id="v-pills-invoices-tab" data-bs-toggle="pill" data-bs-target="#v-pills-invoices"
-                               role="tab" aria-controls="v-pills-invoices" aria-selected="false">Invoices</a>
-
-                            <a id="v-pills-notification-tab" data-bs-toggle="pill"
-                               data-bs-target="#v-pills-notif" role="tab" aria-controls="#v-pills-notif"
-                               aria-selected="false">Notifications</a>
+                            
                         </div>
 
                         <div class="navItem"><a asp-action="mySetting" asp-controller="Home"> My Settings</a></div>
@@ -530,7 +525,7 @@
                     "pagingType": "full_numbers",
                     "searching": false,
                     'columnDefs': [{
-                        'targets': [4],
+                        'targets': [4,5],
                         'orderable': false,
                     }],
                     "language": {
@@ -580,7 +575,7 @@
 
         </script>
 }
-    @if (HttpContextAccessor.HttpContext.Session.GetString("oldpass") == "notok")
+    @if (HttpContextAccessor.HttpContext.Session.GetString("oldpass") == "not ok")
     {
         <script>
             console.log("hello");
@@ -724,5 +719,6 @@
             });
         </script>
 }
+    
 </body>
 </html>

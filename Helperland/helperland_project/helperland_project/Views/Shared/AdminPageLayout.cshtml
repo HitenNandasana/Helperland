@@ -115,12 +115,7 @@
             </div>
         </div>
 
-        <div class="footer-bottom privacy-pol">
-            <div class="container text-center">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut feugiat nunc libero, ac malesuada ligula aliquam ac. <a href="#" title="Privacy Policy">Privacy Policy</a></p>
-                <a href="#" class="yellow-btn ok-btn">OK!</a>
-            </div>
-        </div>
+       
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -134,12 +129,12 @@
 
     <script>
         $(document).ready(function () {
-                $("#umAdminTable").DataTable({
+             $("#umAdminTable").DataTable({
                     "dom": 'Bt<"table-bottom d-flex justify-content-between"<"table-bottom-inner d-flex"li>p>',
                     "pagingType": "full_numbers",
                     "searching": false,
                     'columnDefs': [{
-                        'targets': [5],
+                        'targets': [7],
                         'orderable': false,
                     }],
                     "language": {
@@ -151,19 +146,24 @@
                         },
                         'info': "Total Record: _MAX_",
                     }
-                });
+        });
+
+
+            
+
+
                     $(".buttons-pdf").hide();
                     $(".buttons-copy").hide();
                     $(".buttons-csv").hide();
                     $(".buttons-print").hide();
-            });
+        });
             $(document).ready(function () {
-                $("#srAdminTable").DataTable({
+            var table = $("#srAdminTable").DataTable({
                     "dom": 'Bt<"table-bottom d-flex justify-content-between"<"table-bottom-inner d-flex"li>p>',
                     "pagingType": "full_numbers",
-                    "searching": false,
+                    "searching": true,
                     'columnDefs': [{
-                        'targets': [5],
+                        'targets': [6],
                         'orderable': false,
                     }],
                     "language": {
@@ -176,20 +176,116 @@
                         'info': "Total Record: _MAX_",
                     }
                 });
+
+
+                $("#searchBtn").click(() => {
+                    var serId = $("#searchServiceId").val();
+
+                    //var Pin = $("#searchPinCode").val();
+                    console.log(serId);
+
+                    //table.column(0).search(serId).draw();
+
+                    //var email = $("#searchEmail").val();
+
+                    var cust = $("#customerSelect").val();
+                    console.log(cust);
+
+                    var sp = $("#spSelect").val();
+
+                    var status = $("#reqStatusSelect").val();
+                    console.log(status);
+
+                    var FromDT = $("#searchFromDate").val();
+                    console.log(FromDT);
+
+                    var ToDT = $("#searchToDate").val();
+                    console.log(ToDT);
+
+                    if (serId != "") {
+                        table.column(0).search(serId);
+                    } else {
+                        table.column(0).search("");
+                    }
+
+                    @*if (cust != "") {
+                        table.column(2).search(cust);
+                    } else {
+                        table.column(2).search("");
+                    }*@
+
+                    @*if (Pin != "") {
+                        table.column(8).search(Pin)
+                            ;
+                    } else {
+                        table.column(8).search("");
+                    }*@
+
+                    @*if (email != "") {
+                        table.column(7).search(email)
+                            ;
+                    } else {
+                        table.column(7).search("");
+                    }*@
+
+                    @*if (sp != "") {
+                        table.column(3).search(sp);
+                    } else {
+                        table.column(3).search("");
+                    }*@
+
+                    if (status != null) {
+                        table.column(5).search(status);
+                    } else {
+                        table.column(5).search("");
+                    }
+
+                    @* if (FromDT != "" && ToDT != "") {
+                        $.fn.dataTable.ext.search.push(
+                            function (settings, data, dataIndex) {
+                                var min = new Date(FromDT.split("-")[1] + "-" + FromDT.split("-")[2] + "-" + FromDT.split("-")[0]);
+                                var max = new Date(ToDT.split("-")[1] + "-" + ToDT.split("-")[2] + "-" + ToDT.split("-")[0]);
+                                console.log(min);
+                                console.log(max);
+                                console.log(data[1] + "this is data1");
+                                var date = new Date(data[1].split("-")[2] + "-" + data[1].split("-")[1] + "-" + data[1].split("-")[0]);
+                                console.log(date + "yo");
+                                if (
+                                    (min === null && max === null) ||
+                                    (min === null && date <= max) ||
+                                    (min <= date && max === null) ||
+                                    (min <= date && date <= max)
+                                ) {
+                                    return true;
+                                }
+                                return false;
+                            }
+                        );
+                    } else {
+                        table.column(1).search("");
+                    }*@
+
+                    table.draw();
+                });
+
+
                 $(".buttons-pdf").hide();
                 $(".buttons-copy").hide();
                 $(".buttons-csv").hide();
                 $(".buttons-print").hide();
-            });</script>
+            });
+    </script>
+
     @if (ViewBag.admin_service != null)
     {
         <script>
-$('#admin_ser').addClass('active');
+                $('#admin_ser').addClass('active');
                 $('#admin_user').removeClass('active');
                 $('#v-pills-ServiceRequest').addClass('show');
                 $('#v-pills-ServiceRequest').addClass('active');
                 $('#v-pills-UserManagement').removeClass('show');
-                $('#v-pills-UserManagement').removeClass('active');</script>
-}
+                $('#v-pills-UserManagement').removeClass('active');
+        </script>
+     }
 </body>
 </html>

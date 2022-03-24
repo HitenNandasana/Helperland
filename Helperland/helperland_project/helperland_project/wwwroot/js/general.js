@@ -1,12 +1,3 @@
-/*$('#password, #confirm_password').on('keyup', function () {
-	if ($('#password').val() == $('#confirm_password').val()) {
-		$('#message').html('Matching').css('color', 'green');
-		$('#but').prop('disabled', false);
-	} else {
-		$('#message').html('Not Matching').css('color', 'red');
-		$('#but').prop('disabled', true);
-	}
-});*/
 $(document).ready(function () {
     $("#isCheck").change(function () {
         if (this.checked) {
@@ -220,12 +211,29 @@ $(document).on('click', '.continue-1', function () {
 
 
 $(document).on('click', '.continue-2', function () {
-	$(".ss_step_3").addClass('fade');
-	$(".ss_step_4").removeClass('fade');
-	$(".col-step-3").removeClass('active_tab');
-	$(".col-step-4").addClass('active').addClass('active_tab');
-	step_4_img.src = "/images/payment.png";
-	progress_step_4 = 1;
+	const radioButtons = document.querySelectorAll('input[name=ss_address]');
+	let selectedSize;
+	for (const radioButton of radioButtons) {
+		if (radioButton.checked) {
+			selectedSize = radioButton.value;
+			break;
+		}
+	}
+	var temporary = selectedSize ? 0 : 1;
+	if (temporary == 1) {
+		$('#add_validation').css("display", "block");
+		console.log("show error");
+	}
+	else {
+		$('#add_validation').css("display", "none");
+		$(".ss_step_3").addClass('fade');
+		$(".ss_step_4").removeClass('fade');
+		$(".col-step-3").removeClass('active_tab');
+		$(".col-step-4").addClass('active').addClass('active_tab');
+		step_4_img.src = "/images/payment.png";
+		progress_step_4 = 1;
+	}
+
 });
 
 

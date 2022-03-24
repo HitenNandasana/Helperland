@@ -12,6 +12,7 @@ namespace helperland_project.ViewModel
         public List<AddressViewModel> address { get; set; }
        
         public ZipCodeViewModel zipCodeViewModel { get; set; }
+
         public ServiceRequestViewModel ServiceRequestViewModel { get; set; }
         public int addressId { get; set; }
         [Required]
@@ -19,6 +20,14 @@ namespace helperland_project.ViewModel
         public int addressId2 { get; set; }
 
         public string postalCode { get; set; }
+        public class MustBeTrueAttribute : ValidationAttribute
+        {
+            public override bool IsValid(object value)
+            {
+                return value is bool && (bool)value;
+            }
+        }
+        [MustBeTrue(ErrorMessage = "Please accept privacy policy")]
         public bool checkPolicy { get; set; }
 
         public string streetname { get; set; }

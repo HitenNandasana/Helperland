@@ -55,12 +55,19 @@
                                 <li class="nav-item">
                                     <a asp-action="Contact" asp-controller="Home" class="nav-link none_active" title="Contact us">Contact us</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link border-btn" asp-action="SpSignup" asp-controller="Home" title="Become a Helper">
-                                        Become a
-                                        Helper
-                                    </a>
-                                </li>
+                                @if (HttpContextAccessor.HttpContext.Session.GetString("UserTypeId") == "2")
+                                {
+                                    @*<li class="nav-item"> </li>*@
+                                }
+                                else
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link border-btn" asp-action="SpSignup" asp-controller="Home" title="Become a Helper">
+                                            Become a
+                                            Helper
+                                        </a>
+                                    </li>
+                                }
                                 @if (HttpContextAccessor.HttpContext.Session.GetString("loggedIn") == null)
                                 {
                                     <li class="nav-item">
@@ -159,19 +166,19 @@
                     <form class="row g-3" asp-action="Login" asp-controller="Home">
                         <div class="text-danger" asp-validation-summary="ModelOnly"></div>
                         <div class="col-12 emailModal">
-                            <input asp-for="Email" type="email" class="form-control" id="" placeholder="Email">
+                            <input asp-for="Email" type="email" class="form-control" id="log_Email" placeholder="Email">
                             <span asp-validation-for="Email" class="text-danger"></span>
                             <i class="far fa-user"></i>
                         </div>
                         <div class="col-12 pswModal">
-                            <input asp-for="Password" type="password" class="form-control" id="" placeholder="Password">
+                            <input asp-for="Password" type="password" class="form-control" id="log_Pass" placeholder="Password">
                             <span asp-validation-for="Password" class="text-danger"></span>
                             <i class="fas fa-lock"></i>
                         </div>
                         <div class="col-12">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
-                                <label class="form-check-label" for="gridCheck">
+                                <input asp-for="RememberMe" class="form-check-input" type="checkbox" id="gridCheck">
+                                <label class="form-check-label check_label" for="gridCheck">
                                     Remember me
                                 </label>
                             </div>
@@ -356,6 +363,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="~/lib/twitter-bootstrap/js/bootstrap.js"></script>
     <script src="~/js/general.js"></script>
+
+    <script>
+            var email = '@HttpContextAccessor.HttpContext.Request.Cookies["Email"]';
+
+            var pass = '@HttpContextAccessor.HttpContext.Request.Cookies["Password"]';
+
+        $('#log_Email').val(email);
+        $('#log_Pass').val(pass);
+    </script>
 
     @if (ViewBag.frgtpass != null)
     {

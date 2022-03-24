@@ -3509,6 +3509,13 @@ table#umAdminTable.dataTable thead th {
     background: #fff;
     pointer-events: none;
 }
+.date-button3 {
+    position: absolute;
+    top: 25px;
+    right: 277px;
+    background: #fff;
+    pointer-events: none;
+}
 
 .clock-container {
     position: relative;
@@ -4118,7 +4125,11 @@ label {
 }
 
 /* ------------------------------------------------------------------------------------- */
-/*media*/
+/*-------------------------------------------------------------------------------------------------------------------------------------
+*/
+/*  MEDIA QUERY   */
+
+
 @media (max-width: 467px) {
     .mySetting_header .col-lg-3 {
         width: 30%;
@@ -4276,8 +4287,8 @@ label {
     }
 
     .sp_detail .col-md-4 {
-        width: auto;
-        text-align: center;
+/*        width: auto;
+*/        text-align: center;
     }
 
     .sp_detail_head_bg {
@@ -4382,8 +4393,8 @@ label {
     }
 
     #myDetails .phone_num .col-md-4 {
-        width: 50%;
-        margin-bottom: 10px;
+/*        width: 50%;
+*/        margin-bottom: 10px;
     }
     #spmyDetails .personal_info .col-md-4 {
         width: 50%;
@@ -4729,6 +4740,9 @@ label {
     #spmrTable .spmr_stars {
         justify-content: center !important;
         align-items: center !important;
+    }
+    .spms {
+        margin-right: 12px !important;
     }
 }
 

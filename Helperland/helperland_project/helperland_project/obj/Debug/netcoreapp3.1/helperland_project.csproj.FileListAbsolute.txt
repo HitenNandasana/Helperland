@@ -96,7 +96,6 @@ C:\Users\pci140\Desktop\Project\Helperland\helperland_project\helperland_project
 C:\Users\pci140\Desktop\Project\Helperland\helperland_project\helperland_project\obj\Debug\netcoreapp3.1\helperland_project.TagHelpers.output.cache
 C:\Users\pci140\Desktop\Project\Helperland\helperland_project\helperland_project\obj\Debug\netcoreapp3.1\helperland_project.RazorCoreGenerate.cache
 C:\Users\pci140\Desktop\Project\Helperland\helperland_project\helperland_project\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-C:\Users\pci140\Desktop\Project\Helperland\helperland_project\helperland_project\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\pci140\Desktop\Project\Helperland\helperland_project\helperland_project\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\pci140\Desktop\Project\Helperland\helperland_project\helperland_project\obj\Debug\netcoreapp3.1\Razor\Views\Shared\homepagelayout.cshtml.g.cs
 C:\Users\pci140\Desktop\Project\Helperland\helperland_project\helperland_project\obj\Debug\netcoreapp3.1\Razor\Views\Shared\publicpagelayout.cshtml.g.cs

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -19,10 +20,19 @@ namespace helperland_project.Models
         }
 
         public int UserId { get; set; }
+        [Required(ErrorMessage ="Please enter your firstname")]
         public string FirstName { get; set; }
+        [Required(ErrorMessage = "Please enter your lastname")]
         public string LastName { get; set; }
+        [Required(ErrorMessage = "Please enter your email")]
+        [EmailAddress]
+        [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", ErrorMessage = "Invalid email format")]
         public string Email { get; set; }
+        
         public string Password { get; set; }
+        [Required(ErrorMessage = "Please enter your phonenumber")]
+        [RegularExpression(@"^(\d{10})$", ErrorMessage = "Wrong mobile number")]
+        [MaxLength(10)]
         public string Mobile { get; set; }
         public int UserTypeId { get; set; }
         public int? Gender { get; set; }

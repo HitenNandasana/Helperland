@@ -1,6 +1,7 @@
 ﻿using helperland_project.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,18 +11,27 @@ namespace helperland_project.ViewModel
     {
         public User user { get; set; }
         public List<UserAddress> userAddresses { get; set; }
+
+        /*public class DateValidationAttribute : ValidationAttribute
+        {
+            public override bool IsValid(object value)
+            {
+                DateTime todayDate = Convert.ToDateTime(value);
+                return todayDate <= DateTime.Now;
+            }
+        }*/
+
         public int dob_day { get; set; }
         public int dob_month { get; set; }
-        public int dob_year { get; set; }
+/*        [DateValidation(ErrorMessage = "Sorry, the date can't be later than today's date")]
+*/        public int dob_year { get; set; }
 
-
-        public string pwd { get; set; }
-
-        public string street { get; set; }
-        public int hno { get; set; }
-        public string phone { get; set; }
-        public string pincode { get; set; }
-        public string city { get; set; }
+/*        [Required(ErrorMessage ="old password is required")]
+*/        public string pwd { get; set; }
+        
+        public ChangePasswordViewModel change { get; set; }
+        
+        public MyDetailViewModel mydetail { get; set; }
 
         public int hidden_add_id { get; set; }
         public int delete_add_id { get; set; }
@@ -43,5 +53,7 @@ namespace helperland_project.ViewModel
         public decimal qualit_of_service { get; set; }
         public string feedback { get; set; }
         public int rate_ser_id { get; set; }
+
+
     }
 }

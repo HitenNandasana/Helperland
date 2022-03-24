@@ -265,6 +265,27 @@
             </div>
         </div>
     </div>
+
+
+    <!-- -------------------------------------------- Datasave modal --------------------------------------------------->
+    <div class="modal fade" id="datasaveModal" aria-labelledby="datasaveModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered justify-content-center">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <img src="/images/yes-tickmark.png" alt="success" />
+                </div>
+                <div class="modal-body">
+                    <div class="modal_register">
+                        Data Saved Successfully
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center login-btn">
+                    <button type="submit" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
@@ -283,29 +304,40 @@
 
 
     <script src="~/js/general.js"></script>
+
+    @if (ViewBag.datasave != null)
+    {
+        <script>
+            var myModal = new bootstrap.Modal(document.getElementById("datasaveModal"), {});
+            document.onreadystatechange = function () {
+                myModal.show();
+            };
+        </script>
+    }
+
     @if (ViewBag.showPassModal != null)
     {
 
         <script>
-console.log("show pass modal");
+            console.log("show pass modal");
             var myModal = new bootstrap.Modal(document.getElementById("passchangeModal"), {});
             document.onreadystatechange = function () {
                 myModal.show();
             };</script>
-}
+    }
     @if (ViewBag.doactive != null)
     {
 
         <script>
-var myModal = new bootstrap.Modal(document.getElementById("cantacceptModal"), {});
+            var myModal = new bootstrap.Modal(document.getElementById("cantacceptModal"), {});
             document.onreadystatechange = function () {
                 myModal.show();
             };</script>
-}
+    }
     @if (HttpContextAccessor.HttpContext.Session.GetString("oldpass") == "notok")
     {
         <script>
-console.log("hello");
+            console.log("hello");
             $('#ms_head_3').click();
             $('#spmyDetails').removeClass('show');
             $('#spmyDetails').removeClass('active');
@@ -313,22 +345,22 @@ console.log("hello");
             $('#spmyChangepass').addClass('active');
             $('#spmyChangepass').addClass('show');
             $('#wrongPass').show();</script>
- }
+    }
     else
     {
         <script>
-$('#ms_head_1').click();
+            $('#ms_head_1').click();
             $('#spmyDetails').addClass('show');
             $('#spmyDetails').addClass('active');
 
             $('#spmyChangepass').removeClass('active');
             $('#spmyChangepass').removeClass('show');
             $('#wrongPass').hide();</script>
-}
+    }
     @if (Model.avatar == "1")
     {
         <script>
-var sp_avtr_1 = 1;
+            var sp_avtr_1 = 1;
             var sp_avtr_2 = 0;
             var sp_avtr_3 = 0;
             var sp_avtr_4 = 0;
@@ -432,11 +464,11 @@ var sp_avtr_1 = 1;
                     sp_avtr_6 = 0;
                 }
             })</script>
-}
+    }
     @if (Model.avatar == "2")
     {
         <script>
-var sp_avtr_1 = 0;
+            var sp_avtr_1 = 0;
             var sp_avtr_2 = 1;
             var sp_avtr_3 = 0;
             var sp_avtr_4 = 0;
@@ -540,11 +572,11 @@ var sp_avtr_1 = 0;
                     sp_avtr_6 = 0;
                 }
             })</script>
-}
+    }
     @if (Model.avatar == "3")
     {
         <script>
-var sp_avtr_1 = 0;
+            var sp_avtr_1 = 0;
             var sp_avtr_2 = 0;
             var sp_avtr_3 = 1;
             var sp_avtr_4 = 0;
@@ -648,11 +680,11 @@ var sp_avtr_1 = 0;
                     sp_avtr_6 = 0;
                 }
             })</script>
-}
+    }
     @if (Model.avatar == "4")
     {
         <script>
-var sp_avtr_1 = 0;
+            var sp_avtr_1 = 0;
             var sp_avtr_2 = 0;
             var sp_avtr_3 = 0;
             var sp_avtr_4 = 1;
@@ -756,11 +788,11 @@ var sp_avtr_1 = 0;
                     sp_avtr_6 = 0;
                 }
             })</script>
-}
+    }
     @if (Model.avatar == "5")
     {
         <script>
-var sp_avtr_1 = 0;
+            var sp_avtr_1 = 0;
             var sp_avtr_2 = 0;
             var sp_avtr_3 = 0;
             var sp_avtr_4 = 0;
@@ -864,11 +896,11 @@ var sp_avtr_1 = 0;
                     sp_avtr_6 = 0;
                 }
             })</script>
-}
+    }
     @if (Model.avatar == "6")
     {
         <script>
-var sp_avtr_1 = 0;
+            var sp_avtr_1 = 0;
             var sp_avtr_2 = 0;
             var sp_avtr_3 = 0;
             var sp_avtr_4 = 0;
@@ -972,11 +1004,11 @@ var sp_avtr_1 = 0;
                     sp_avtr_6 = 0;
                 }
             })</script>
-}
+    }
     @if (Model.avatar == null)
     {
         <script>
-var sp_avtr_1 = 0;
+            var sp_avtr_1 = 0;
             var sp_avtr_2 = 0;
             var sp_avtr_3 = 0;
             var sp_avtr_4 = 0;
@@ -1080,35 +1112,35 @@ var sp_avtr_1 = 0;
                     sp_avtr_6 = 0;
                 }
             })</script>
-}
+    }
     @if (ViewBag.sp_gender != null)
     {
         if (ViewBag.sp_gender == 1)
         {
             <script>$('input:radio[name=gender]')[0].checked = true;</script>
- }
+        }
         if (ViewBag.sp_gender == 2)
         {
             <script>$('input:radio[name=gender]')[1].checked = true;</script>
- }
+        }
         if (ViewBag.sp_gender == 3)
         {
             <script>$('input:radio[name=gender]')[2].checked = true;</script>
-}
+        }
     }
     @if (ViewBag.sp_cust_block != null)
     {
         <script>
-$('#v-pills-bc-nav').addClass('active');
+            $('#v-pills-bc-nav').addClass('active');
             $('#v-pills-mySetting').removeClass('active');
             $('#v-pills-mySetting').removeClass('show');
             $('#v-pills-bc').addClass('show');
             $('#v-pills-bc').addClass('active');</script>
-}
+    }
     @if (HttpContextAccessor.HttpContext.Session.GetString("cant_complete_ser") == "true")
     {
         <script>
-var nospModal = new bootstrap.Modal(document.getElementById("nospModal"), {});
+            var nospModal = new bootstrap.Modal(document.getElementById("nospModal"), {});
             document.onreadystatechange = function () {
                 nospModal.show();
             };
@@ -1117,39 +1149,39 @@ var nospModal = new bootstrap.Modal(document.getElementById("nospModal"), {});
             $('#v-pills-mySetting').removeClass('show');
             $('#v-pills-us').addClass('show');
             $('#v-pills-us').addClass('active');</script>
-}
+    }
     @if (ViewBag.sp_cancel_service != null)
     {
         <script>
-$('#v-pills-us-nav').addClass('active');
+            $('#v-pills-us-nav').addClass('active');
             $('#v-pills-mySetting').removeClass('active');
             $('#v-pills-mySetting').removeClass('show');
             $('#v-pills-us').addClass('show');
             $('#v-pills-us').addClass('active');</script>
-}
+    }
     @if (ViewBag.sp_complete_service != null)
     {
         <script>
-$('#v-pills-us-nav').addClass('active');
+            $('#v-pills-us-nav').addClass('active');
             $('#v-pills-mySetting').removeClass('active');
             $('#v-pills-mySetting').removeClass('show');
             $('#v-pills-us').addClass('show');
             $('#v-pills-us').addClass('active');</script>
-}
+    }
     @if (ViewBag.service_accepted != null)
     {
         <script>
-$('#v-pills-nsr-nav').addClass('active');
+            $('#v-pills-nsr-nav').addClass('active');
             $('#v-pills-mySetting').removeClass('active');
             $('#v-pills-mySetting').removeClass('show');
             $('#v-pills-nsr').addClass('show');
             $('#v-pills-nsr').addClass('active');</script>
-}
+    }
 
     @if (ViewBag.spmysetting != null)
     {
         <script>
-$(document).ready(function () {
+            $(document).ready(function () {
                 $("#spshTable").DataTable({
                     "dom": 'Bt<"table-bottom d-flex justify-content-between"<"table-bottom-inner d-flex"li>p>',
                     "pagingType": "full_numbers",
@@ -1278,7 +1310,7 @@ $(document).ready(function () {
                 $(".buttons-print").hide();
             });
         </script>
-}
+    }
 
 </body>
 </html>

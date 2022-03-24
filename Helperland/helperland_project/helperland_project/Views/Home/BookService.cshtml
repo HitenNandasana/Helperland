@@ -1,4 +1,6 @@
-﻿@model helperland_project.ViewModel.BookServiceViewModel
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@model helperland_project.ViewModel.BookServiceViewModel
 @{
     ViewData["Title"] = "BookService";
     Layout = "~/Views/Shared/publicpagelayout.cshtml";
@@ -62,9 +64,10 @@
                                     <p class="fw-bold">Enter Your Postal Code: </p>
                                     <div class="bed-row">
                                         <div class="postcode">
-                                            <input asp-for="zipCodeViewModel.zipcode" type="tel" class="form-control" placeholder="Postal code" required>
-@*                                            <span asp-validation-for="zipCodeViewModel.zipcode" class="text-danger"></span>
-*@                                        </div>
+                                            <input asp-for="zipCodeViewModel.zipcode" type="tel" class="form-control" placeholder="Postal code" pattern="[0-9]{10}"  onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))">
+                                            <span asp-validation-for="zipCodeViewModel.zipcode" class="text-danger"></span>
+                                            
+                                        </div>
                                         <div class="bt book">
                                             <button type="submit" class="c_sub_btn postal_check_btn"><h3>Check Availability</h3></button>
                                         </div>
@@ -83,12 +86,14 @@
                                                 <span class="date-button">
                                                     <img src="/images/admin-calendar-blue.png">
                                                 </span>
+                                                <p class="text-danger validate_date_empty fade">Select date & time</p>
                                             </div>
                                             <div class="col-sm-5 clock-container">
                                                 <input asp-for="ServiceRequestViewModel.servicestrarttime" id="service_time" type="time" placeholder="00:00" class="form-control">
                                                 <span class="clock-button">
                                                     <img src="/images/clock-blue.png">
                                                 </span>
+                                                <p class="text-danger validate_time fade">Please select time</p>
                                             </div>
                                         </div>
                                     </div>
@@ -101,7 +106,7 @@
                                                 <option value="5">5.0 Hrs</option>
                                                 <option value="6">6.0 Hrs</option>
                                                 <option value="7">7.0 Hrs</option>
-                                                
+
                                             </select>
                                         </div>
                                     </div>
@@ -237,6 +242,9 @@
                                     <div class="col-lg-1">
                                         <button class="newadd_btn mb-3 mt-2" type="button" name="newadd">+ Add New Address</button>
                                     </div>
+                                    <div>
+                                        <span id="add_validation" class="text-danger">Please select address</span>
+                                    </div>
                                     <div class="new_add fade">
                                         <div class="row">
                                             <div class="col-md-6">
@@ -255,7 +263,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <p class="mt-3 mb-1">Postcode</p>
-                                                <input asp-for="postalCode" id="add_postal" type="text" placeholder="Postalcode" class="form-control" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" />
+                                                <input asp-for="postalCode" value="@HttpContextAccessor.HttpContext.Session.GetString("zipcode")" id="add_postal" type="text" placeholder="Postalcode" class="form-control" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" disabled />
 
                                             </div>
                                             <div class="col-md-6">
@@ -325,52 +333,59 @@
                             <div class="ss_step_4 fade">
                                 <div class="bathsec">
                                     <p class="fw-bold">Pay securely with Helperland payment gateway.</p>
-                                    
-                                        <hr>
-                                        <div class="row pt-2">
-                                            <div class="col-lg-12">
-                                                <iframe name="__privateStripeFrame52510" frameborder="0" allowtransparency="true"
-                                                        scrolling="no" allow="payment *"
-                                                        src="https://js.stripe.com/v3/elements-inner-card-6f95dd34a5c89aae610bcf619d0b2112.html#locale=en&amp;wait=false&amp;mids[guid]=26be9e97-86fa-42b9-a15e-5580bc4b93c6697bcd&amp;mids[muid]=b9c63c2a-e1e3-4391-af0e-035491e42cff6f2065&amp;mids[sid]=50a9fbe1-5a7d-44fa-bb11-fabf27d5d426d48d0d&amp;hidePostalCode=true&amp;style[base][iconColor]=%23666EE8&amp;style[base][color]=%2331325F&amp;style[base][lineHeight]=36px&amp;style[base][fontSize]=16px&amp;style[base][::placeholder][color]=%23c5c5c5&amp;rtl=false&amp;componentName=card&amp;keyMode=test&amp;apiKey=pk_test_CbN2mTsadzVC1WpDPDgcDWbG&amp;referrer=https%3A%2F%2Fweb1.anasource.com%2Ftrainee2021%2Fbook-service&amp;controllerId=__privateStripeController5256"
-                                                        title="Secure card payment input frame"
-                                                        style=" margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; user-select: none !important; transform: translate(0px) !important; height: 36px;">
-                                                </iframe>
+
+                                    <hr>
+                                    <div class="row pt-2">
+                                        <div class="col-lg-12">
+                                            <iframe name="__privateStripeFrame52510" frameborder="0" allowtransparency="true"
+                                                    scrolling="no" allow="payment *"
+                                                    src="https://js.stripe.com/v3/elements-inner-card-6f95dd34a5c89aae610bcf619d0b2112.html#locale=en&amp;wait=false&amp;mids[guid]=26be9e97-86fa-42b9-a15e-5580bc4b93c6697bcd&amp;mids[muid]=b9c63c2a-e1e3-4391-af0e-035491e42cff6f2065&amp;mids[sid]=50a9fbe1-5a7d-44fa-bb11-fabf27d5d426d48d0d&amp;hidePostalCode=true&amp;style[base][iconColor]=%23666EE8&amp;style[base][color]=%2331325F&amp;style[base][lineHeight]=36px&amp;style[base][fontSize]=16px&amp;style[base][::placeholder][color]=%23c5c5c5&amp;rtl=false&amp;componentName=card&amp;keyMode=test&amp;apiKey=pk_test_CbN2mTsadzVC1WpDPDgcDWbG&amp;referrer=https%3A%2F%2Fweb1.anasource.com%2Ftrainee2021%2Fbook-service&amp;controllerId=__privateStripeController5256"
+                                                    title="Secure card payment input frame"
+                                                    style=" margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; user-select: none !important; transform: translate(0px) !important; height: 36px;">
+                                            </iframe>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row pt-2">
+                                        <div class="col-md-9">
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="row">
+                                                <label class="accepted_card_lbl">Accepted cards</label>
+                                            </div>
+                                            <div class="row d-flex">
+                                                <img class="card_img" src="/images/visa-1.png">
+                                                <img class="card_img" src="/images/master-2.png">
+                                                <img class="card_img" src="/images/ax-1.png">
                                             </div>
                                         </div>
-                                        <hr>
-                                        <div class="row pt-2">
-                                            <div class="col-md-9">
+                                    </div>
+                                    <hr>
 
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="row">
-                                                    <label class="accepted_card_lbl">Accepted cards</label>
-                                                </div>
-                                                <div class="row d-flex">
-                                                    <img class="card_img" src="/images/visa-1.png">
-                                                    <img class="card_img" src="/images/master-2.png">
-                                                    <img class="card_img" src="/images/ax-1.png">
-                                                </div>
-                                            </div>
+                                    <div class="row pt-2 accept_3_policy">
+                                        <div class="col-md-1 pt-1">
+                                            <input type="checkbox" asp-for="checkPolicy" id="terms-book" class="check_box" required>
                                         </div>
-                                        <hr>
-
-                                        <div class="row pt-2 accept_3_policy">
-                                            <div class="col-md-1 pt-1">
-                                                <input type="checkbox" asp-for="checkPolicy" id="terms-book" class="check_box">
-                                            </div>
-                                            <div class="col-md-11">
-                                                <label class="check_label_book">I accept <a href="#">terms and conditions </a>, the <a href="#">Cancellation Policy </a> and the <a href="#"> privacy policy</a>. I confirm that Helperland starts to execute the contract before the expiry of the withdrawal period and I loose my right of withdrawal as a consumer with full performance of the contract. </label>
-                                            </div>
+                                        <div class="col-md-11">
+                                            <label class="check_label_book">
+                                                I accept <a href="#">terms and conditions </a>, the
+                                                <a href="#">Cancellation Policy </a> and the <a href="#"> privacy policy</a>.
+                                                I confirm that Helperland starts to execute the contract before the expiry of the
+                                                withdrawal period and I loose my right of withdrawal as a consumer with full
+                                                performance of the contract.
+                                            </label>
                                         </div>
+                                        <span asp-validation-for="checkPolicy" class="text-danger"></span>
+                                    </div>
 
-                                        <hr>
+                                    <hr>
 
-                                        <div class="bt book1">
-                                            <button class="pay_btn complete_booking_btn" type="submit" name="BookWC"><h3>Complete Booking</h3></button>
-                                        </div>
+                                    <div class="bt book1">
+                                        <button class="pay_btn complete_booking_btn" type="submit" name="BookWC"><h3>Complete Booking</h3></button>
+                                    </div>
 
-                                    
+
                                 </div>
                             </div>
                         </form>

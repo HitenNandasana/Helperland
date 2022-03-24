@@ -8,7 +8,9 @@ namespace helperland_project.ViewModel
 {
     public class ZipCodeViewModel
     {
-/*        [Required(ErrorMessage ="Postalcode is required")]
-*/        public string zipcode { get; set; }
+        [Required(ErrorMessage = "Please enter your postalcode")]
+        
+        [StringLength(6, MinimumLength = 6, ErrorMessage = "Invalid pincode")]
+        public string zipcode { get; set; }
     }
 }
