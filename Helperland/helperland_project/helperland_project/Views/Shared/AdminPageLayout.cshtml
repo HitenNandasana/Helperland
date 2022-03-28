@@ -129,34 +129,75 @@
 
     <script>
         $(document).ready(function () {
-             $("#umAdminTable").DataTable({
-                    "dom": 'Bt<"table-bottom d-flex justify-content-between"<"table-bottom-inner d-flex"li>p>',
-                    "pagingType": "full_numbers",
-                    "searching": false,
-                    'columnDefs': [{
-                        'targets': [7],
-                        'orderable': false,
-                    }],
-                    "language": {
-                        "paginate": {
-                            "first": '<img src="/images/leftMost.png" alt="">',
-                            "last": '<img src="/images/RightMost.png" alt="">',
-                            "previous": '<img src="/images/Left-arrow-button-copy.png" alt="">',
-                            "next": '<img src="/images/Right-arrow-button.png" alt="">'
-                        },
-                        'info': "Total Record: _MAX_",
-                    }
+            var tables = $("#umAdminTable").DataTable({
+                "dom": 'Bt<"table-bottom d-flex justify-content-between"<"table-bottom-inner d-flex"li>p>',
+                "pagingType": "full_numbers",
+                "searching": true,
+                'columnDefs': [{
+                    'targets': [7],
+                    'orderable': false,
+                }],
+                "language": {
+                    "paginate": {
+                        "first": '<img src="/images/leftMost.png" alt="">',
+                        "last": '<img src="/images/RightMost.png" alt="">',
+                        "previous": '<img src="/images/Left-arrow-button-copy.png" alt="">',
+                        "next": '<img src="/images/Right-arrow-button.png" alt="">'
+                    },
+                    'info': "Total Record: MAX",
+                }
+            });
+
+            $("#searchB").click(() => {
+
+                var username = $("#searchUN").val();
+                console.log(username);
+
+
+                var Pin = $("#searchPinCode").val();
+                console.log(Pin);
+
+                var Phone = $("searchPhone").val();
+                console.log(Phone);
+
+
+                if (Pin != "") {
+                    tables.column(5).search(Pin)
+                        ;
+                } else {
+                    tables.column(5).search("");
+                }
+
+                if (Phone != "") {
+                    tables.column(4).search(Phone)
+                        ;
+                } else {
+                    tables.column(4).search("");
+                }
+
+                if (username != null) {
+                    tables.column(0).search(username)
+                        ;
+                } else {
+                    tables.column(0).search("");
+                }
+
+
+
+                tables.draw();
+            });
+
+
+
+
+
+
+            $(".buttons-pdf").hide();
+            $(".buttons-copy").hide();
+            $(".buttons-csv").hide();
+            $(".buttons-print").hide();
         });
 
-
-            
-
-
-                    $(".buttons-pdf").hide();
-                    $(".buttons-copy").hide();
-                    $(".buttons-csv").hide();
-                    $(".buttons-print").hide();
-        });
             $(document).ready(function () {
             var table = $("#srAdminTable").DataTable({
                     "dom": 'Bt<"table-bottom d-flex justify-content-between"<"table-bottom-inner d-flex"li>p>',
@@ -192,6 +233,7 @@
                     console.log(cust);
 
                     var sp = $("#spSelect").val();
+                    console.log(sp);
 
                     var status = $("#reqStatusSelect").val();
                     console.log(status);
@@ -208,11 +250,11 @@
                         table.column(0).search("");
                     }
 
-                    @*if (cust != "") {
+                    if (cust != null) {
                         table.column(2).search(cust);
                     } else {
                         table.column(2).search("");
-                    }*@
+                    }
 
                     @*if (Pin != "") {
                         table.column(8).search(Pin)
@@ -228,11 +270,11 @@
                         table.column(7).search("");
                     }*@
 
-                    @*if (sp != "") {
+                    if (sp != null) {
                         table.column(3).search(sp);
                     } else {
                         table.column(3).search("");
-                    }*@
+                    }
 
                     if (status != null) {
                         table.column(5).search(status);
@@ -240,15 +282,18 @@
                         table.column(5).search("");
                     }
 
-                    @* if (FromDT != "" && ToDT != "") {
+                    if (FromDT != "" && ToDT != "") {
                         $.fn.dataTable.ext.search.push(
                             function (settings, data, dataIndex) {
                                 var min = new Date(FromDT.split("-")[1] + "-" + FromDT.split("-")[2] + "-" + FromDT.split("-")[0]);
                                 var max = new Date(ToDT.split("-")[1] + "-" + ToDT.split("-")[2] + "-" + ToDT.split("-")[0]);
-                                console.log(min);
-                                console.log(max);
-                                console.log(data[1] + "this is data1");
-                                var date = new Date(data[1].split("-")[2] + "-" + data[1].split("-")[1] + "-" + data[1].split("-")[0]);
+
+                                var str = data[1].replaceAll(" ", "").split(':')[0].slice(0, -2);
+
+                                console.log(str);
+                                //var date = new Date(data[1].split("-")[2] + "-" + data[1].split("-")[1] + "-" + data[1].split("-")[0]);
+                                var date = new Date(str.split("-")[1] + "-" + str.split("-")[0] + "-" + str.split("-")[2]);
+
                                 console.log(date + "yo");
                                 if (
                                     (min === null && max === null) ||
@@ -263,7 +308,7 @@
                         );
                     } else {
                         table.column(1).search("");
-                    }*@
+                    }
 
                     table.draw();
                 });
