@@ -86,7 +86,7 @@
                                                 <span class="date-button">
                                                     <img src="/images/admin-calendar-blue.png">
                                                 </span>
-                                                <p class="text-danger validate_date_empty fade">Select date & time</p>
+                                                <p class="text-danger validate_date_empty fade">Please select date</p>
                                             </div>
                                             <div class="col-sm-5 clock-container">
                                                 <input asp-for="ServiceRequestViewModel.servicestrarttime" id="service_time" type="time" placeholder="00:00" class="form-control">
@@ -94,6 +94,8 @@
                                                     <img src="/images/clock-blue.png">
                                                 </span>
                                                 <p class="text-danger validate_time fade">Please select time</p>
+                                                <p class="text-danger validate_time fade1">Invalid time</p>
+
                                             </div>
                                         </div>
                                     </div>

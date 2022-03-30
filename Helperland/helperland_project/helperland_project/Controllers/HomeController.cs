@@ -1050,7 +1050,7 @@ namespace helperland_project.Controllers
         {
             var ser = _helperlandContext.ServiceRequests.Where(x => x.ServiceId == spMySetting.hidden_complete_ser_id);
             var userid = Int32.Parse(HttpContext.Session.GetString("UserId"));
-            var check_blocked = _helperlandContext.FavoriteAndBlockeds.Where(x => x.UserId == userid).Where(x => x.TargetUserId == spMySetting.customer_id);
+            var check_blocked = _helperlandContext.FavoriteAndBlockeds.Where(x => x.UserId == userid && x.TargetUserId == spMySetting.customer_id).FirstOrDefault();
             if (check_blocked == null)
             {
                 FavoriteAndBlocked favblock = new FavoriteAndBlocked()
@@ -1138,6 +1138,91 @@ namespace helperland_project.Controllers
             return RedirectToAction("spMySetting");
         }
 
+        [HttpGet]
+        public IActionResult GetServiceReqCalendar()
+        {
+            int? Uid = Int32.Parse(HttpContext.Session.GetString("UserId"));
+
+            if (Uid != null)
+            {
+                List<SPServiceSchedule> data = new List<SPServiceSchedule>();
+                //var req = _helperlandContext.ServiceRequests.Where(x => x.ServiceProviderId == Uid && (x.Status == 1 || x.Status == 2)).ToList();
+                var req = _helperlandContext.ServiceRequests.Where(x => x.ServiceProviderId == Uid && x.Status == 1).ToList();
+                foreach (var item in req)
+                {
+                    var req_add = _helperlandContext.ServiceRequestAddresses.Where(x => x.ServiceRequestId == item.ServiceRequestId).FirstOrDefault();
+                    int duration_hr = 0;
+                    int duration_min = 0;
+                    DateTime end_time = item.ServiceStartDate;
+                    double duration = Convert.ToDouble(item.ServiceHours + item.ExtraHours);
+                    string dura_str = duration.ToString();
+                    bool dura_is_decimal = dura_str.Contains(".");
+                    string[] dura_arr = dura_str.Split(".");
+                    if (dura_is_decimal)
+                    {
+                        duration_hr = Int32.Parse(dura_arr[0]);
+
+
+
+                        if (Int32.Parse(dura_arr[1]) != 0)
+                        {
+                            duration_min = 30;
+                        }
+                        else
+                        {
+                            duration_min = 0;
+                        }
+                    }
+                    else
+                    {
+                        duration_hr = Int32.Parse(dura_str);
+                        duration_min = 0;
+
+                    }
+
+
+                    TimeSpan end_time_cal = new TimeSpan(duration_hr, duration_min, 0);
+
+                    end_time = end_time + end_time_cal;
+
+
+                    string end_str = end_time.ToString();
+                    string end = end_str.Substring(10, 6);
+
+                    string date_str = item.ServiceStartDate.ToString();
+                    string date_day = date_str.Substring(0, 2);
+                    string date_mon = date_str.Substring(3, 2);
+                    string date_y = date_str.Substring(6, 4);
+                    string start = date_str.Substring(10, 6);
+
+                    string address = req_add.AddressLine1 + " \n" + req_add.City + " , " + req_add.PostalCode;
+
+                    SPServiceSchedule res = new SPServiceSchedule();
+                    res.Id = item.ServiceRequestId;
+                    res.Title = start + " - " + end;
+                    res.Start = date_y + "-" + date_mon + "-" + date_day;
+                    res.addressline1 = address;
+                    if (item.Status == 2)
+                    {
+                        res.Color = "#67b644";
+                    }
+                    else if (item.Status == 1)
+                    {
+                        res.Color = "#1D7A8C";
+                    }
+
+
+                    data.Add(res);
+                }
+
+                return new JsonResult(data);
+            }
+            else
+            {
+                return Json("notfound");
+            }
+        }
+
         //========================== admin============================
         public IActionResult Admin()
         {
@@ -1153,28 +1238,32 @@ namespace helperland_project.Controllers
         [HttpPost]
         public IActionResult service_reschedule_admin(AdminViewModel admin)
         {
-            int ser_id = admin.hidden_ser_id;
-            var startdate = admin.c_ser_date;
-            DateTime start_date = DateTime.Parse(startdate);
-            var starttime = admin.c_ser_time;
-            int s_hr = Int32.Parse(starttime.Substring(0, 2));
-            int s_min = Int32.Parse(starttime.Substring(3, 2));
-            TimeSpan servicestarttime = new TimeSpan(s_hr, s_min, 0);
-            start_date = start_date.Date + servicestarttime;
+            /*if (ModelState.IsValid)
+            {*/
+                int ser_id = admin.hidden_ser_id;
+                var startdate = admin.c_ser_date;
+                DateTime start_date = DateTime.Parse(startdate);
+                var starttime = admin.c_ser_time;
+                int s_hr = Int32.Parse(starttime.Substring(0, 2));
+                int s_min = Int32.Parse(starttime.Substring(3, 2));
+                TimeSpan servicestarttime = new TimeSpan(s_hr, s_min, 0);
+                start_date = start_date.Date + servicestarttime;
 
 
-            var service = _helperlandContext.ServiceRequests.Where(x => x.ServiceId == ser_id).FirstOrDefault();
-            var ser_req_id = _helperlandContext.ServiceRequests.Where(x => x.ServiceId == ser_id).FirstOrDefault().ServiceRequestId;
-            var service_address = _helperlandContext.ServiceRequestAddresses.Where(x => x.ServiceRequestId == ser_req_id).FirstOrDefault();
+                var service = _helperlandContext.ServiceRequests.Where(x => x.ServiceId == ser_id).FirstOrDefault();
+                var ser_req_id = _helperlandContext.ServiceRequests.Where(x => x.ServiceId == ser_id).FirstOrDefault().ServiceRequestId;
+                var service_address = _helperlandContext.ServiceRequestAddresses.Where(x => x.ServiceRequestId == ser_req_id).FirstOrDefault();
 
 
-            service.ServiceStartDate = start_date;
-            service_address.AddressLine1 = admin.c_street + " " + admin.c_hno;
-            service_address.City = admin.c_city;
-            service_address.PostalCode = admin.c_postal;
-            _helperlandContext.SaveChanges();
-            admin_service_request = 1;
-            return RedirectToAction("Admin");
+                service.ServiceStartDate = start_date;
+                service_address.AddressLine1 = admin.c_street + " " + admin.c_hno;
+                service_address.City = admin.c_city;
+                service_address.PostalCode = admin.c_postal;
+                _helperlandContext.SaveChanges();
+                admin_service_request = 1;
+                return RedirectToAction("Admin");
+           /* }
+            return RedirectToAction("Admin");*/
         }
 
         [HttpPost]
@@ -1303,7 +1392,7 @@ namespace helperland_project.Controllers
                                    from sre in _helperlandContext.ServiceRequestExtras
                                    from sra in _helperlandContext.ServiceRequestAddresses
                                    from uid in _helperlandContext.Users
-                                   where sr.Status == 1 && sr.ZipCode == user_Zipcode && sr.ServiceRequestId == sre.ServiceRequestId && sr.ServiceRequestId == sra.ServiceRequestId && sr.UserId == uid.UserId && sr.ServiceStartDate > DateTime.Now
+                                   where sr.Status == 1 && sr.ZipCode == user_Zipcode && sr.ServiceRequestId == sre.ServiceRequestId && sr.ServiceRequestId == sra.ServiceRequestId && sr.UserId == uid.UserId && sr.ServiceProviderId == userid
                                    select new UpcomingServiceViewModel()
                                    {
                                        cust_id = sr.UserId,

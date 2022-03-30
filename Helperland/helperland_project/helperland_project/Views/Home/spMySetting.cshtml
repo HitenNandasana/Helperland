@@ -28,9 +28,9 @@
                 <li id="v-pills-nsr-nav" class="nav-item " data-bs-toggle="pill" data-bs-target="#v-pills-nsr"><a href="#" class="nav-link">New Service Requests</a></li>
                 <li id="v-pills-us-nav" class="nav-item " data-bs-toggle="pill" data-bs-target="#v-pills-us"><a href="#" class="nav-link">Upcoming Services</a></li>
                 <li id="v-pills-sh-nav" class="nav-item " data-bs-toggle="pill" data-bs-target="#v-pills-sh"><a href="#" class="nav-link">Service History</a></li>
+                <li id="v-pills-ss-nav" class="nav-item" data-bs-toggle="pill" data-bs-target="#v-pills-ss"><a href="#" class="nav-link">Service schedule</a></li>
                 <li id="v-pills-mr-nav" class="nav-item " data-bs-toggle="pill" data-bs-target="#v-pills-mr"><a href="#" class="nav-link">My Ratings</a></li>
                 <li id="v-pills-bc-nav" class="nav-item" data-bs-toggle="pill" data-bs-target="#v-pills-bc"><a href="#" class="nav-link">Block Customer</a></li>
-
             </ul>
         </div>
         <div class="sp_detail sp_menu_nav_content tab-content">
@@ -125,57 +125,57 @@
                                     }
                                     string[] extra_services = { "Inside Cabinets", "Inside fridge", "Inside Oven", "Laundry wash & dry", "Interior windows" };
 
-                                                <tr class="sp_details pt-3"  data-bs-toggle="modal" data-bs-target="@("#servicedetailModal"+ser.service_id)">
-                                                    <td class="col-md-1 text-center">
-                                                        <p>@ser.service_id</p>
-                                                    </td>
+                                    <tr class="sp_details pt-3" data-bs-toggle="modal" data-bs-target="@("#servicedetailModal"+ser.service_id)">
+                                        <td class="col-md-1 text-center">
+                                            <p>@ser.service_id</p>
+                                        </td>
 
-                                                    <td class="col-md-3 text-center">
-                                                        <div class="">
-                                                            <p>
-                                                                <img src="/images/calendar2.png"> <b>@date</b><br>
-                                                                <img src="/images/layer-14.png">@start - @end
-                                                            </p>
-                                                        </div>
-                                                    </td>
+                                        <td class="col-md-3 text-center">
+                                            <div class="">
+                                                <p>
+                                                    <img src="/images/calendar2.png"> <b>@date</b><br>
+                                                    <img src="/images/layer-14.png">@start - @end
+                                                </p>
+                                            </div>
+                                        </td>
 
-                                                    <td class="col-md-4 text-center">
-                                                        <div class="row">
+                                        <td class="col-md-4 text-center">
+                                            <div class="row">
 
-                                                            <div class="col-sm-11 spsh_address">
-                                                                <div class="row">
-                                                                    <pre>       @ser.cust_name</pre>
-                                                                </div>
+                                                <div class="col-sm-11 spsh_address">
+                                                    <div class="row">
+                                                        <pre>       @ser.cust_name</pre>
+                                                    </div>
 
-                                                                <div class="row pt-1">
-                                                                    <pre><img src="/images/layer-15.png"> @ser.service_address</pre><br>
-                                                                    <pre>       @ser.pincode , @ser.city</pre>
-                                                                </div>
-                                                            </div>
+                                                    <div class="row pt-1">
+                                                        <pre><img src="/images/layer-15.png"> @ser.service_address</pre><br>
+                                                        <pre>       @ser.pincode , @ser.city</pre>
+                                                    </div>
+                                                </div>
 
 
-                                                        </div>
-                                                    </td>
-                                                    <td class="col-md-1">
-                                                        <div>
-                                                            <p>@ser.service_amount €</p>
-                                                        </div>
-                                                    </td>
-                                                    <td class="col-md-1">
-                                                        <div>
-                                                            <p>@ser.conflictId</p>
-                                                        </div>
-                                                    </td>
-                                                    <td class="col-md-2">
-                                                        @if (ser.conflictId == null)
-                                                        {
-                                                            <div>
-                                                                <button data-bs-toggle="modal" data-bs-target="@("#servicedetailModal"+ser.service_id)" class="spnsr_accept_btn">Accept</button>
-                                                            </div>
-                                                        }
+                                            </div>
+                                        </td>
+                                        <td class="col-md-1">
+                                            <div>
+                                                <p>@ser.service_amount €</p>
+                                            </div>
+                                        </td>
+                                        <td class="col-md-1">
+                                            <div>
+                                                <p>@ser.conflictId</p>
+                                            </div>
+                                        </td>
+                                        <td class="col-md-2">
+                                            @if (ser.conflictId == null)
+                                            {
+                                                <div>
+                                                    <button data-bs-toggle="modal" data-bs-target="@("#servicedetailModal"+ser.service_id)" class="spnsr_accept_btn">Accept</button>
+                                                </div>
+                                            }
 
-                                                    </td>
-                                                </tr>
+                                        </td>
+                                    </tr>
 
 
 
@@ -275,9 +275,9 @@
                                                         <input asp-for="hidden_nsr_ser_id" type="hidden" value="@ser.service_id" />
                                                         @if (ser.conflictId == null)
                                                         {
-                                                        <div class="col-sm-3">
-                                                            <button data-bs-dismiss="modal" class="service_accept_btn" type="submit"><img src="/images/ic-check.png">Accept</button>
-                                                        </div>
+                                                            <div class="col-sm-3">
+                                                                <button data-bs-dismiss="modal" class="service_accept_btn" type="submit"><img src="/images/ic-check.png">Accept</button>
+                                                            </div>
                                                         }
                                                     </form>
 
@@ -385,7 +385,7 @@
                                     }
                                     string[] extra_services = { "Inside Cabinets", "Inside fridge", "Inside Oven", "Laundry wash & dry", "Interior windows" };
 
-                                    <tr class="sp_details pt-3"  data-bs-toggle="modal" data-bs-target="@("#serviceacceptcancelModal"+ser.service_id)">
+                                    <tr class="sp_details pt-3" data-bs-toggle="modal" data-bs-target="@("#serviceacceptcancelModal"+ser.service_id)">
                                         <td class="col-md-1 text-center">
                                             <p>@ser.service_id</p>
                                         </td>
@@ -859,6 +859,30 @@
             </div>
 
 
+            <div id="v-pills-ss" class="tab-pane fade">
+                <div id="calendar">
+
+                </div>
+
+
+
+                <div class="modal fade" id="myModal" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered justify-content-center">
+                        <div class="modal-content">
+                            <div class="modal-header justify-content-center">
+                                <p class="modal-title"><span id="eventTitle"></span></p>
+                            </div>
+                            <div class="modal-body">
+
+                            </div>
+                            <div class="modal-footer justify-content-center login-btn">
+                                <button type="submit" data-bs-dismiss="modal">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="tab-pane fade show active" id="v-pills-mySetting" role="tabpanel" area-labelledby="v-pills-mySetting-tab">
                 <!-- Pills navs -->
                 <ul class="row mySetting_header nav nav-pills">
@@ -927,7 +951,7 @@
                                     <label>First Name</label>
                                 </div>
                                 <div class="row pt-1">
-                                    <input asp-for="spmydetail.Firstname" value="@Model.spmydetail.Firstname" class="form-control" type="text" placeholder="Firstname"/>
+                                    <input asp-for="spmydetail.Firstname" value="@Model.spmydetail.Firstname" class="form-control" type="text" placeholder="Firstname" />
                                     <span asp-validation-for="spmydetail.Firstname" class="text-danger"></span>
                                 </div>
                             </div>
@@ -936,7 +960,7 @@
                                     <label>Last Name</label>
                                 </div>
                                 <div class="row pt-1">
-                                    <input asp-for="spmydetail.Lastname" value="@Model.spmydetail.Lastname" class="form-control" type="text" placeholder="Lastname"/>
+                                    <input asp-for="spmydetail.Lastname" value="@Model.spmydetail.Lastname" class="form-control" type="text" placeholder="Lastname" />
                                     <span asp-validation-for="spmydetail.Lastname" class="text-danger"></span>
 
                                 </div>
@@ -1185,7 +1209,7 @@
                                     <label>House Number</label>
                                 </div>
                                 <div class="row pt-1">
-                                    <input asp-for="spmydetail.house" value="@Model.spmydetail.house" class="form-control" type="text" placeholder="House number"/>
+                                    <input asp-for="spmydetail.house" value="@Model.spmydetail.house" class="form-control" type="text" placeholder="House number" />
                                     <span asp-validation-for="spmydetail.house" class="text-danger"></span>
 
                                 </div>
@@ -1205,7 +1229,7 @@
                                     <label>City</label>
                                 </div>
                                 <div class="row">
-                                    <input asp-for="spmydetail.city" value="@Model.spmydetail.city" class="form-control" type="text" placeholder="city"/>
+                                    <input asp-for="spmydetail.city" value="@Model.spmydetail.city" class="form-control" type="text" placeholder="city" />
                                     <span asp-validation-for="spmydetail.city" class="text-danger"></span>
 
                                 </div>

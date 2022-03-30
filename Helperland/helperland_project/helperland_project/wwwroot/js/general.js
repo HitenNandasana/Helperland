@@ -146,7 +146,88 @@ var progress_step_2 = 0;
 var progress_step_3 = 0;
 var progress_step_4 = 0;
 
+// aa delete karvu 
+/*$(document).on('click', '.cust_rescheduled', function () {
+	var temp = 1;
+	var check_time_empty = false;
+	var check_date_empty = false;
+	if ($('#service_time').val().length === 0) {
+		$('.validate_time').removeClass('fade');
+		temp = 0;
+		check_time_empty = true;
+		if (!check_date_empty) {
+			$('.validate_date_empty').addClass('fade');
+		}
+	}
+	else {
+*//*		$('.validate_time').addClass('fade');
+*//*		temp = 1;
+		check_time_empty = false;
+	}
+	if ($('#service_date').val().length === 0) {
+		$('.validate_date_empty').removeClass('fade');
+		temp = 0;
+		check_date_empty = true;
+		if (!check_time_empty) {
+*//*			$('.validate_time').addClass('fade');
+*//*		}
+	}
+	else {
+		check_date_empty = false;
+		check_time_empty = false;
+		var service_date = $("#service_date").val();
+		var today = new Date();
+		var dd = String(today.getDate()).padStart(2, '0');
+		var mm = String(today.getMonth() + 1).padStart(2, '0');
+		var yyyy = today.getFullYear();
 
+		var year = service_date.substr(0, 4);
+		var month = service_date.substr(5, 2);
+		var day = service_date.substr(8, 2);
+
+		var service_time = $('#service_time').val();
+		var hour = String(today.getHours());
+		var min = String(today.getMinutes());
+
+		var startHour = service_time.substr(0, 2);
+		var startMin = service_time.substr(3, 2);
+
+
+		if ((parseInt(day) > parseInt(dd)) && (parseInt(month) >= parseInt(mm)) && (parseInt(year) == parseInt(yyyy)) || (parseInt(day) == parseInt(dd)) && (parseInt(month) == parseInt(mm)) && (parseInt(year) == parseInt(yyyy)) && (parseInt(startHour) >= parseInt(hour))
+			|| (parseInt(month) > parseInt(mm)) && (parseInt(year) == parseInt(yyyy))) {
+			$('.validate_date').addClass('fade');
+			$('.validate_date_empty').addClass('fade');
+			$('.validate_time').addClass('fade1');
+			*//*			$('.validate_time').addClass('fade');
+			*//*
+			temp = 1;
+
+		}
+		else {
+			temp = 0;
+			$('.validate_date').removeClass('fade');
+			$('.validate_date_empty').addClass('fade');
+			$('.validate_time').removeClass('fade1');
+			*//*			$('.validate_time').addClass('fade');
+			*//*
+		}
+	}
+
+	$('.cust_rescheduled').prop('disabled', true);
+	$('input[type="text"]').keyup(function () {
+		if (temp == 1) {
+			$('.cust_rescheduled').prop('disabled', false);
+		}
+	});
+
+
+	*//*if (temp == 1) {
+		$(".cust_rescheduled").attr("disabled", false)
+	} else {
+		$(".cust_rescheduled").attr("disabled", true)
+    }*//*
+});*/
+// .....
 
 $(document).on('click', '.continue-1', function () {
 	var temp = 1;
@@ -161,8 +242,8 @@ $(document).on('click', '.continue-1', function () {
 		}
 	}
 	else {
-		$('.validate_time').addClass('fade');
-		temp = 1;
+/*		$('.validate_time').addClass('fade');
+*/		temp = 1;
 		check_time_empty = false;
 	}
 	if ($('#service_date').val().length === 0) {
@@ -170,11 +251,12 @@ $(document).on('click', '.continue-1', function () {
 		temp = 0;
 		check_date_empty = true;
 		if (!check_time_empty) {
-			$('.validate_time').addClass('fade');
-		}
+/*			$('.validate_time').addClass('fade');
+*/		}
 	}
 	else {
 		check_date_empty = false;
+		check_time_empty = false;
 		var service_date = $("#service_date").val();
 		var today = new Date();
 		var dd = String(today.getDate()).padStart(2, '0');
@@ -184,9 +266,22 @@ $(document).on('click', '.continue-1', function () {
 		var year = service_date.substr(0, 4);
 		var month = service_date.substr(5, 2);
 		var day = service_date.substr(8, 2);
-		if ((parseInt(day) >= parseInt(dd)) && (parseInt(month) == parseInt(mm)) && (parseInt(year) == parseInt(yyyy))) {
+
+		var service_time = $('#service_time').val();
+		var hour = String(today.getHours());
+		var min = String(today.getMinutes());
+
+		var startHour = service_time.substr(0, 2);
+		var startMin = service_time.substr(3, 2);
+
+
+		if ((parseInt(day) > parseInt(dd)) && (parseInt(month) >= parseInt(mm)) && (parseInt(year) == parseInt(yyyy)) || (parseInt(day) == parseInt(dd)) && (parseInt(month) == parseInt(mm)) && (parseInt(year) == parseInt(yyyy)) && (parseInt(startHour) >= parseInt(hour))
+				|| (parseInt(month) > parseInt(mm)) && (parseInt(year) == parseInt(yyyy))) {
 			$('.validate_date').addClass('fade');
 			$('.validate_date_empty').addClass('fade');
+			$('.validate_time').addClass('fade1');
+/*			$('.validate_time').addClass('fade');
+*/
 			temp = 1;
 
 		}
@@ -194,8 +289,12 @@ $(document).on('click', '.continue-1', function () {
 			temp = 0;
 			$('.validate_date').removeClass('fade');
 			$('.validate_date_empty').addClass('fade');
+			$('.validate_time').removeClass('fade1');
+/*			$('.validate_time').addClass('fade');
+*/
 		}
 	}
+	
 
 	if (temp == 1) {
 		$(".ss_step_2").addClass('fade');

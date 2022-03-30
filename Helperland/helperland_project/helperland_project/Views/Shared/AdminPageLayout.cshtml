@@ -126,6 +126,17 @@
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
 
+    <script>
+        $("v-pills-ServiceRequest").click(function () {
+@*            $('#um_form')[0].reset();
+*@            $('#sr_form').trigger("reset");
+        });
+        $("v-pills-UserManagement").click(function () {
+@*            $('#sr_form')[0].reset();
+*@            $('#um_form').trigger("reset");
+        });
+    </script>
+
 
     <script>
         $(document).ready(function () {
@@ -144,7 +155,7 @@
                         "previous": '<img src="/images/Left-arrow-button-copy.png" alt="">',
                         "next": '<img src="/images/Right-arrow-button.png" alt="">'
                     },
-                    'info': "Total Record: MAX",
+                    'info': "Total Record: _MAX_",
                 }
             });
 
@@ -157,7 +168,7 @@
                 var Pin = $("#searchPinCode").val();
                 console.log(Pin);
 
-                var Phone = $("searchPhone").val();
+                var Phone = $("#searchPhone").val();
                 console.log(Phone);
 
 

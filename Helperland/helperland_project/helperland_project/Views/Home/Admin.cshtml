@@ -22,20 +22,19 @@
                 </div>
                 <div class="row user_mng_search mt-3">
                     <div>
-                        <form>
-                            <div class="user_mng_search_form ">
-                                <div>
+                        <form id="sr_form">
+                            <div class="row">
+                                <div class="col-md-3">
                                     <input type="text" name="ServiceID" class="form-control" id="searchServiceId" placeholder="Service ID">
                                 </div>
-                                <div>
+                                <div class="col-md-3">
                                     <select class="form-control form-select" id="customerSelect">
-                                        <option disabled selected value=" ">Customers</option>
+                                        <option selected value=" ">Customers</option>
                                         @foreach (var data in Model.users)
                                         {
                                             @if (data.UserTypeId == 1)
                                             {
                                                 var u_name = data.FirstName + " " + data.LastName;
-
                                                 <option value="@u_name">@u_name</option>
                                             }
                                         }
@@ -43,9 +42,9 @@
 
                                     </select>
                                 </div>
-                                <div>
+                                <div class="col-md-3">
                                     <select class="form-control form-select" id="spSelect">
-                                        <option disabled selected value="">Service Provider</option>
+                                        <option selected value="">Service Provider</option>
                                         @foreach (var data in Model.users)
                                         {
                                             @if (data.UserTypeId == 2)
@@ -57,9 +56,9 @@
                                         }
                                     </select>
                                 </div>
-                                <div>
+                                <div class="col-md-3">
                                     <select name="status" id="reqStatusSelect" class="form-control form-select">
-                                        <option value="" disabled selected>Status</option>
+                                        <option selected value="" >Status</option>
                                         <option value="Active">Active</option>
                                         <option value="Completed">Completed</option>
                                         <option value="Cancelled">Cancelled</option>
@@ -67,8 +66,10 @@
                                         <option value="Pending">Pending</option>
                                     </select>
                                 </div>
-                                <div class="d-flex">
-                                    <div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="d-flex col-md-6">
+                                    <div class="col-md-5">
                                         <div class="sd-container">
                                             <input class="form-control" id="searchFromDate" type="text" name="from_date" placeholder="From Date" onfocus="(this.type='date')" onblur="(this.type='text')" />
                                             <span class="open-button">
@@ -76,7 +77,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <div>
+                                    <div class="col-md-5">
                                         <div class="sd-container">
                                             <input class="form-control" id="searchToDate" type="text" name="to_date" placeholder="To Date" onfocus="(this.type='date')" onblur="(this.type='text')" />
                                             <span class="open-button">
@@ -87,10 +88,10 @@
                                 </div>
 
 
-                                <div>
+                                <div class="col-md-1">
                                     <button class="form-control search_btn" id="searchBtn" type="button" name="search">search</button>
                                 </div>
-                                <div>
+                                <div class="col-md-1">
                                     <button class="form-control" type="submit" name="Clear">Clear</button>
                                 </div>
                             </div>
@@ -279,13 +280,15 @@
                                                     <form asp-action="service_reschedule_admin" asp-controller="Home">
                                                         <div class="row">
                                                             <div class="col-md-6 date-container">
-                                                                <input asp-for="c_ser_date" type="text" id="@("service_date"+ser.ser_id)" value="@(date)" class="form-control date_field" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="01/01/1111" required />
+                                                                <input asp-for="c_ser_date" type="text" id="@("service_date"+ser.ser_id)" value="@(date)" class="form-control date_field" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="01/01/1111"  />
+                                                                <span asp-validation-for="c_ser_date" class="text-danger"></span>
                                                                 <span class="date-button3">
                                                                     <img src="/images/admin-calendar-blue.png">
                                                                 </span>
                                                             </div>
                                                             <div class="col-md-6 clock-container">
-                                                                <input asp-for="c_ser_time" id="@("service_time"+ser.ser_id)" type="time" placeholder="00:00" class="form-control" required>
+                                                                <input asp-for="c_ser_time" id="@("service_time"+ser.ser_id)" type="time" placeholder="00:00" class="form-control" >
+                                                                <span asp-validation-for="c_ser_time" class="text-danger"></span>
                                                                 <span class="clock-button2">
                                                                     <img src="/images/clock-blue.png">
                                                                 </span>
@@ -302,10 +305,8 @@
                                                                 </div>
                                                                 <div class="row pt-1">
                                                                     <div class="col-sm-12">
-                                                                        <input asp-for="c_street" id="@("add_street"+ser.ser_id)" value="@(add[0]+" "+add[1])" type="text" placeholder="Street Name" class="form-control" required />
-                                                                        <div id="add_street_err" class="text-danger fade">
-                                                                            streetname required
-                                                                        </div>
+                                                                        <input asp-for="c_street" id="@("add_street"+ser.ser_id)" value="@(add[0]+" "+add[1])" type="text" placeholder="Street Name" class="form-control"  />
+                                                                        <span asp-validation-for="c_street" class="text-danger"></span>
                                                                     </div>
                                                                 </div>
 
@@ -314,8 +315,8 @@
                                                                 </div>
                                                                 <div class="row pt-1">
                                                                     <div class="col-sm-12">
-                                                                        <input asp-for="c_postal" id="@("add_postal"+ser.ser_id)" value="@(ser.pincode)" type="text" placeholder="Postalcode" class="form-control" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" required />
-
+                                                                        <input asp-for="c_postal" id="@("add_postal"+ser.ser_id)" value="@(ser.pincode)" type="text" placeholder="Postalcode" class="form-control" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" />
+                                                                        <span asp-validation-for="c_postal" class="text-danger"></span>
                                                                     </div>
                                                                 </div>
 
@@ -329,10 +330,8 @@
                                                                 </div>
                                                                 <div class="row pt-1">
                                                                     <div class="col-sm-12">
-                                                                        <input asp-for="c_hno" id="@("add_house"+ser.ser_id)" value="@(add[2])" type="text" placeholder="House number" class="form-control" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" required />
-                                                                        <div id="add_house_err" class="text-danger fade">
-                                                                            House number required
-                                                                        </div>
+                                                                        <input asp-for="c_hno" id="@("add_house"+ser.ser_id)" value="@(add[2])" type="text" placeholder="House number" class="form-control" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" />
+                                                                        <span asp-validation-for="c_hno" class="text-danger"></span>
                                                                     </div>
                                                                 </div>
 
@@ -341,10 +340,8 @@
                                                                 </div>
                                                                 <div class="row pt-1">
                                                                     <div class="col-sm-12">
-                                                                        <input asp-for="c_city" id="@("add_city"+ser.ser_id)" value="@(ser.city)" type="text" placeholder="City" class="form-control" name="cityname" required />
-                                                                        <div id="add_city_err" class="text-danger fade">
-                                                                            city name required
-                                                                        </div>
+                                                                        <input asp-for="c_city" id="@("add_city"+ser.ser_id)" value="@(ser.city)" type="text" placeholder="City" class="form-control" name="cityname"  />
+                                                                        <span asp-validation-for="c_city" class="text-danger"></span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -359,13 +356,13 @@
                                                             <label class="title_lbl">Why do you want to reschedule service request?</label>
                                                         </div>
                                                         <div class="row">
-                                                            <textarea placeholder="Why do you want to reschedule service request?" class="form-control sp_rate_textarea" required></textarea>
+                                                            <textarea placeholder="Why do you want to reschedule service request?" class="form-control sp_rate_textarea" ></textarea>
                                                         </div>
                                                         <div class="row pt-2">
                                                             <label class="title_lbl">Call center EMP notes</label>
                                                         </div>
                                                         <div class="row">
-                                                            <textarea placeholder="EMP notes" class="form-control sp_rate_textarea" required></textarea>
+                                                            <textarea placeholder="EMP notes" class="form-control sp_rate_textarea" ></textarea>
                                                         </div>
 
                                                         <div class="row pt-3">
@@ -407,14 +404,14 @@
                         <button class="user_mng_add_usr"><img src="/images/add.png" class="pb-1"> Add New User</button>
                     </div>
                 </div>
-                <div class="row user_mng_search mt-3">
+                <div class="row user_mng_search-um mt-3">
                     <div>
-                        <form>
+                        <form id="um_form">
                             <div class="user_mng_search_form ">
 
                                 <div>
                                     <select class="form-control form-select" id="searchUN">
-                                        <option disabled selected value=" ">User name</option>
+                                        <option selected value=" ">User name</option>
                                         @foreach (var data in Model.users)
                                         {
 

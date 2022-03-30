@@ -1414,6 +1414,39 @@ ratesp_modal .modal-content {
 #successModal .modal-footer {
     border-top: none;
 }
+
+/*-----new last---
+*/
+
+#myModal .modal-content {
+    max-width: 320px;
+}
+
+#myModal .login-btn {
+    text-align: center;
+}
+
+#myModal button {
+    color: white;
+    background-color: #6DA9B5;
+    padding: 5px 15px;
+    border: 1px solid transparent;
+    border-radius: 17px;
+}
+
+#myModal .modal-header {
+    border-bottom: none;
+}
+
+#myModal .modal-body {
+    text-align: center;
+    padding: 0 1rem;
+}
+
+#myModal .modal-footer {
+    border-top: none;
+}
+
 /*banner section*/
 .hero-banner-section a.scroll-link {
     display: inline-block;
@@ -2980,7 +3013,14 @@ table.dataTable thead .sorting_desc {
 .user_mng_search {
     background-color: white;
     border: 1px solid #E5E5E5;
-    height: 86px;
+    height: 130px;
+    align-items: center !important;
+}
+
+.user_mng_search-um {
+    background-color: white;
+    border: 1px solid #E5E5E5;
+    height: 84px;
     align-items: center !important;
 }
 
@@ -3268,6 +3308,7 @@ table#umAdminTable.dataTable thead th {
 .sd-container {
     position: relative;
     float: left;
+    
 }
 
 .open-button {
@@ -3606,6 +3647,9 @@ table#umAdminTable.dataTable thead th {
 }
 
 .fade {
+    display: none;
+}
+.fade1{
     display: none;
 }
 

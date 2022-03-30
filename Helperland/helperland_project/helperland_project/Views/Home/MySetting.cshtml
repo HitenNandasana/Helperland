@@ -305,21 +305,24 @@
                                                     <form asp-action="reschedule_service" asp-controller="Home">
                                                         <div class="row pt-2">
                                                             <div class="col-sm-7 date-container">
-                                                                <input type="text" asp-for="rescheduled_date" id="service_date" class="form-control date_field" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="01/01/1111" required/>
+                                                                <input type="text" asp-for="rescheduled_date" id="service_date" class="form-control date_field" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="01/01/1111" required />
                                                                 <span class="date-button2">
                                                                     <img src="/images/admin-calendar-blue.png">
                                                                 </span>
+                                                                <p class="text-danger validate_date_empty fade">Please select date</p>
                                                             </div>
                                                             <div class="col-sm-5 clock-container">
                                                                 <input id="service_time" asp-for="rescheduled_time" type="time" placeholder="00:00" class="form-control" required>
                                                                 <span class="clock-button2">
                                                                     <img src="/images/clock-blue.png">
                                                                 </span>
+                                                                <p class="text-danger validate_time fade">Please select time</p>
+                                                                <p class="text-danger validate_time fade1">Invalid time</p>
                                                             </div>
                                                             <input asp-for="hidden_service_id" type="hidden" value="@ser.service_id" />
                                                         </div>
                                                         <div class="row pt-2 update-container">
-                                                            <button type="submit" class="update_btn">Update</button>
+                                                            <button type="submit" class="update_btn cust_rescheduled">Update</button>
                                                         </div>
                                                     </form>
 
