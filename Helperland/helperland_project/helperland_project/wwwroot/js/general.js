@@ -146,8 +146,10 @@ var progress_step_2 = 0;
 var progress_step_3 = 0;
 var progress_step_4 = 0;
 
-// aa delete karvu 
-/*$(document).on('click', '.cust_rescheduled', function () {
+
+
+// customer rescheduled services in my deshboard contant ........
+$(document).on('click', '.cust_rescheduled', function () {
 	var temp = 1;
 	var check_time_empty = false;
 	var check_date_empty = false;
@@ -160,8 +162,7 @@ var progress_step_4 = 0;
 		}
 	}
 	else {
-*//*		$('.validate_time').addClass('fade');
-*//*		temp = 1;
+		temp = 1;
 		check_time_empty = false;
 	}
 	if ($('#service_date').val().length === 0) {
@@ -169,8 +170,7 @@ var progress_step_4 = 0;
 		temp = 0;
 		check_date_empty = true;
 		if (!check_time_empty) {
-*//*			$('.validate_time').addClass('fade');
-*//*		}
+		}
 	}
 	else {
 		check_date_empty = false;
@@ -198,8 +198,7 @@ var progress_step_4 = 0;
 			$('.validate_date').addClass('fade');
 			$('.validate_date_empty').addClass('fade');
 			$('.validate_time').addClass('fade1');
-			*//*			$('.validate_time').addClass('fade');
-			*//*
+			
 			temp = 1;
 
 		}
@@ -208,26 +207,26 @@ var progress_step_4 = 0;
 			$('.validate_date').removeClass('fade');
 			$('.validate_date_empty').addClass('fade');
 			$('.validate_time').removeClass('fade1');
-			*//*			$('.validate_time').addClass('fade');
-			*//*
+			$('.validate_date_empty1').removeClass('fade1');
+			$('.validate_date_empty1').removeClass('fade');
+
 		}
 	}
 
-	$('.cust_rescheduled').prop('disabled', true);
-	$('input[type="text"]').keyup(function () {
-		if (temp == 1) {
-			$('.cust_rescheduled').prop('disabled', false);
-		}
-	});
-
-
-	*//*if (temp == 1) {
-		$(".cust_rescheduled").attr("disabled", false)
+	
+	if (temp == 1) {
+		$('.cust_rescheduled').prop('disabled', false);
 	} else {
-		$(".cust_rescheduled").attr("disabled", true)
-    }*//*
-});*/
-// .....
+		$('.cust_rescheduled').prop('disabled', true);
+		
+    }
+	
+	
+	$('#resch').click(function () {
+		location.reload();
+	});
+});
+
 
 $(document).on('click', '.continue-1', function () {
 	var temp = 1;
@@ -588,7 +587,8 @@ $(document).on('change', '#service_date', function () {
 	var year = service_date.substr(0, 4);
 	var month = service_date.substr(5, 2);
 	var day = service_date.substr(8, 2);
-	if ((parseInt(day) >= parseInt(dd)) && (parseInt(month) == parseInt(mm)) && (parseInt(year) == parseInt(yyyy))) {
+	if ((parseInt(day) > parseInt(dd)) && (parseInt(month) >= parseInt(mm)) && (parseInt(year) == parseInt(yyyy)) || (parseInt(day) == parseInt(dd)) && (parseInt(month) == parseInt(mm)) && (parseInt(year) == parseInt(yyyy)) && (parseInt(startHour) >= parseInt(hour))
+		|| (parseInt(month) > parseInt(mm)) && (parseInt(year) == parseInt(yyyy))) {
 		var final_date = day + '/' + month + '/' + year;
 		$('.ps_date').text(final_date);
 		$('.validate_date').addClass('fade');

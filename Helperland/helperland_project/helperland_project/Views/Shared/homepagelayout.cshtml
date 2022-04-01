@@ -292,6 +292,26 @@
         </div>
     </div>
     <!-- booking successfully submitted modal end-->
+    <!-- -------------------------------------------cant accept service modal ------------------------------------------ -->
+    <div class="modal fade" id="cantacceptModal" aria-labelledby="nospModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered justify-content-center">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <img src="/images/no-tickmark.png" alt="failed" />
+                </div>
+                <div class="modal-body">
+                    <div class="modal_register">
+                        <div class="text-danger">Access Denied</div>
+                        contact Admin to Activate your account.
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center login-btn">
+                    <button type="submit" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div>
         @RenderBody()
@@ -418,6 +438,17 @@
         <script>
 
             var myModal = new bootstrap.Modal(document.getElementById("bookingsuccessModal"), {});
+            document.onreadystatechange = function () {
+                myModal.show();
+            };
+        </script>
+    }
+
+    @if (ViewBag.notvalid != null)
+    {
+        <script>
+
+            var myModal = new bootstrap.Modal(document.getElementById("cantacceptModal"), {});
             document.onreadystatechange = function () {
                 myModal.show();
             };

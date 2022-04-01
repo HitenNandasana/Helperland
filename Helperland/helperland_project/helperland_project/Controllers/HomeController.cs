@@ -297,6 +297,19 @@ namespace helperland_project.Controllers
                     HttpContext.Session.SetString("FirstName", details.FirstOrDefault().FirstName);
                     HttpContext.Session.SetString("UserTypeId", details.FirstOrDefault().UserTypeId.ToString());
 
+                    if (HttpContext.Session.GetString("UserTypeId") == "2")
+                    {
+                        var uid = Int32.Parse(HttpContext.Session.GetString("UserId"));
+                        var user = _helperlandContext.Users.Where(x => x.UserId == uid).FirstOrDefault();
+
+                        if (user.IsActive != true)
+                        {
+                            ViewBag.notvalid = "invalid";
+                            return View("Index");
+                        }
+
+                    }
+
                     if (loginViewModel.RememberMe == true)
                     {
                         CookieOptions options = new CookieOptions();

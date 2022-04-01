@@ -279,7 +279,7 @@
 
                                                     <div class="row">
                                                         <div class="col-sm-3">
-                                                            <button data-bs-toggle="modal" data-bs-target="@("#rescheduleModal"+ser.service_id)" class="service_reschedule_btn" type="button">Reschedule</button>
+                                                            <button  data-bs-toggle="modal" data-bs-target="@("#rescheduleModal"+ser.service_id)" class="service_reschedule_btn" type="button">Reschedule</button>
                                                         </div>
                                                         <div class="col-sm-3">
                                                             <button class="cancel_btn"  data-bs-target="@("#cancelserviceModal"+ser.service_id)" data-bs-toggle="modal" type="button">Cancel</button>
@@ -299,20 +299,21 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="rescheduleModalLabel">Reschedule Service Request</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    <button id="resch" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <form asp-action="reschedule_service" asp-controller="Home">
                                                         <div class="row pt-2">
                                                             <div class="col-sm-7 date-container">
-                                                                <input type="text" asp-for="rescheduled_date" id="service_date" class="form-control date_field" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="01/01/1111" required />
+                                                                <input type="text" asp-for="rescheduled_date" id="service_date" class="form-control date_field" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="01/01/1111" />
                                                                 <span class="date-button2">
                                                                     <img src="/images/admin-calendar-blue.png">
                                                                 </span>
                                                                 <p class="text-danger validate_date_empty fade">Please select date</p>
+                                                                <p class="text-danger validate_date_empty1 fade1">Invalid date</p>
                                                             </div>
                                                             <div class="col-sm-5 clock-container">
-                                                                <input id="service_time" asp-for="rescheduled_time" type="time" placeholder="00:00" class="form-control" required>
+                                                                <input id="service_time" asp-for="rescheduled_time" type="time" placeholder="00:00" class="form-control" >
                                                                 <span class="clock-button2">
                                                                     <img src="/images/clock-blue.png">
                                                                 </span>
